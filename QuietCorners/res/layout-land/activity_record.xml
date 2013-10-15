@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Record">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Page Placeholder"
+        android:textColor="@color/background_text"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_heading_height"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/current_location"
+        android:id="@+id/txtCurrentLocation"
+        android:layout_above="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginBottom="21dp"
+        android:layout_alignRight="@+id/textView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/record_sound"
+        android:id="@+id/soundButton"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginTop="13dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/record_light"
+        android:id="@+id/lightButton"
+        android:layout_alignTop="@+id/soundButton"
+        android:layout_alignRight="@+id/textView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_networks"
+        android:id="@+id/openNetworksButton"
+        android:layout_below="@+id/soundButton"
+        android:layout_alignLeft="@+id/soundButton"
+        android:layout_marginTop="11dp"
+        android:layout_alignRight="@+id/soundButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:id="@+id/confirmButton"
+        android:layout_alignTop="@+id/openNetworksButton"
+        android:layout_alignLeft="@+id/lightButton"
+        android:layout_alignRight="@+id/lightButton"
+        android:layout_alignBottom="@+id/openNetworksButton" />
+
+
+</RelativeLayout>
