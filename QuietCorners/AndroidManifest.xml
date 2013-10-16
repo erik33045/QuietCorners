@@ -29,13 +29,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/FullscreenTheme">
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <uses-library android:name="com.google.android.maps" />
         <!-- Main Activity -->
         <activity
             android:name=".Main"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,28 +44,31 @@
         <!-- About Activity -->
         <activity
             android:name=".About"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
         <!-- Explore Activity -->
         <activity
             android:name=".Explore"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
         <!-- Record Activity -->
         <activity
             android:name=".Record"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
         <!-- Sound Record Activity -->
         <activity
             android:name=".SoundRecord"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <!-- Lumen Record Activity -->
         <activity
             android:name=".LumenRecord"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <!-- Wifi Test Activity -->
         <activity
             android:name=".WifiTest"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <!-- Confirm Activity -->
         <activity
             android:name=".Confirm"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
 
         <!-- This is our Map API Key -->
         <meta-data
