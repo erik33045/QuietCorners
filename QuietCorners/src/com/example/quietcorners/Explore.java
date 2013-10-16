@@ -22,7 +22,7 @@ public class Explore extends FragmentActivity {
         setContentView(R.layout.explore_activity);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        InstantiateMap();
+        AttemptToInstantiateMap();
     }
 
     //Start a location listener
@@ -62,9 +62,16 @@ public class Explore extends FragmentActivity {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10000.0f, onLocationChange);
     }
 
-    private void InstantiateMap() {
-        map = ((SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
+    public void AttemptToInstantiateMap() {
+        if(LocationMethods.AreGooglePlayServicesValid(this))
+        {
+            map = ((SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map)).getMap();
+            map.setMyLocationEnabled(true);
+        }
+        else
+        {
+            LocationMethods.ShowUnavailableServicesDialogue("s",  Explore.this);
+        }
     }
 }

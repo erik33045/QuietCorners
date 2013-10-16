@@ -1,7 +1,11 @@
 package com.example.quietcorners;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.location.Location;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,5 +43,19 @@ public class LocationMethods {
         double randDouble = (((double) r.nextInt(75)) / 10000);
         //If true, make it negative, total range of -0.0075 to 0.0075
         return r.nextBoolean() ? -randDouble : randDouble;
+    }
+
+    public static void ShowUnavailableServicesDialogue(String errorMessage, Context c ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setMessage(errorMessage);
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public static boolean AreGooglePlayServicesValid(Context context) {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
+        return resultCode == ConnectionResult.SUCCESS;
     }
 }
