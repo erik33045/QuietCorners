@@ -69,6 +69,10 @@
         <activity
             android:name=".Confirm"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+       <!-- Picture Recording Activity -->
+        <activity
+            android:name=".PicRecord"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
 
         <!-- This is our Map API Key -->
         <meta-data
