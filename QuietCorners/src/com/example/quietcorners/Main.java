@@ -89,7 +89,7 @@ public class Main extends Activity {
 
                         if (visible) {
                             // Schedule a hide().
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
+                            // delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
                     }
                 });
@@ -99,7 +99,7 @@ public class Main extends Activity {
             @Override
             public void onClick(View view) {
                 if (TOGGLE_ON_CLICK) {
-                    mSystemUiHider.toggle();
+                    //mSystemUiHider.toggle();
                 } else {
                     mSystemUiHider.show();
                 }
@@ -147,7 +147,7 @@ public class Main extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        // delayedHide(100);
     }
 
 

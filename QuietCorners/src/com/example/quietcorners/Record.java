@@ -106,8 +106,8 @@ public class Record extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Record.this, PicRecord.class);
-                startActivity(i);
+                //Intent i = new Intent(Record.this, PicRecord.class);
+                //startActivity(i);
             }
         });
     }
