@@ -23,6 +23,7 @@ public class Record extends Activity {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         GetSoundButtonAndBindClickEvent();
         GetLightButtonAndBindClickEvent();
+        GetPictureButtonAndBindClickEvent();
         GetOpenNetworksButtonAndBindClickEvent();
         GetConfirmButtonAndBindClickEvent();
     }
@@ -95,6 +96,17 @@ public class Record extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Record.this, WifiTest.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void GetPictureButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.pictureButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Record.this, PicRecord.class);
                 startActivity(i);
             }
         });

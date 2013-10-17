@@ -13,5 +13,6 @@
     <string name="record_light">Record Light</string>
     <string name="open_networks">Open Networks</string>
     <string name="confirm">Confirm</string>
+    <string name="record_picture">Take Picture</string>
     <string name="error_getting_maps">Google Play Services were not found or were unavailable</string>
 </resources>

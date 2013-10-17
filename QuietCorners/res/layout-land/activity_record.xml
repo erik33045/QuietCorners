@@ -59,10 +59,17 @@
         android:layout_height="wrap_content"
         android:text="@string/confirm"
         android:id="@+id/confirmButton"
+        android:layout_below="@+id/pictureButton"
+        android:layout_toLeftOf="@+id/lightButton"
+        android:layout_toRightOf="@+id/openNetworksButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Picture"
+        android:id="@+id/pictureButton"
         android:layout_alignTop="@+id/openNetworksButton"
-        android:layout_alignLeft="@+id/lightButton"
-        android:layout_alignRight="@+id/lightButton"
-        android:layout_alignBottom="@+id/openNetworksButton" />
+        android:layout_toRightOf="@+id/confirmButton" />
 
 
 </RelativeLayout>
