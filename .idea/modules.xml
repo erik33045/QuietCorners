@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QuietCorners/QuietCorners.iml" filepath="$PROJECT_DIR$/QuietCorners/QuietCorners.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuietCorners/QuietCorners-QuietCorners.iml" filepath="$PROJECT_DIR$/QuietCorners/QuietCorners-QuietCorners.iml" />
       <module fileurl="file://$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/temp.iml" filepath="$PROJECT_DIR$/temp.iml" />
       <module fileurl="file://$PROJECT_DIR$/temp.iml" filepath="$PROJECT_DIR$/temp.iml" />
