@@ -15,4 +15,13 @@
     <string name="confirm">Confirm</string>
     <string name="record_picture">Take Picture</string>
     <string name="error_getting_maps">Google Play Services were not found or were unavailable</string>
+    <string name="about_us">About Us</string>
+    <string name="the_app">The App</string>
+    <string name="app_info">Quiet Corners is about finding that place which gives you a break from the world. By interacting with other local students like you, we have catalogued places which offers a chance to study or relax. Quiet corners, an application for a peaceful place.</string>
+    <string name="team_image">Team Image</string>
+    <string name="michael">Michael Ware - Developer, Lead UI Design</string>
+    <string name="steven">Steven Brewerse - Developer, Documentation</string>
+    <string name="erik">Erik Hendrickson - Developer, Architect</string>
+    <string name="team">The Team</string>
+    <string name="contact">Contact: erikh1@mail.usf.edu</string>
 </resources>

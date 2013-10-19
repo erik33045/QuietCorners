@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="google-play-services">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/QuietCorners/build/exploded-bundles/TempGooglePlayServices_libUnspecified.aar/libs/google-play-services.jar!/" />
       <root url="jar://$PROJECT_DIR$/QuietCorners/build/exploded-bundles/QuietCornersGooglePlayServices_libUnspecified.aar/libs/google-play-services.jar!/" />
     </CLASSES>
     <JAVADOC />

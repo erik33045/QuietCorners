@@ -1,7 +1,5 @@
 Things that need to happen (sorted by how quickly it's needed or how much I hate a bug!):
--Make sure all developers can code, push, and pull to the github repository
 -Investigate and implement the ability to click on a map marker to link to a page (OnInfoWindowClickListener)
--Get rid of that Damn titleBar!
 -Investigate and implement local disk storage of variables
 -Investigate and implement adding things to a database which involves:
 	-Having the phone push a request to a service handler
@@ -11,8 +9,6 @@ Things that need to happen (sorted by how quickly it's needed or how much I hate
 -Investigate and implement functionality to record brightness level
 -Investigate and implement functionality to query for open wifi networks
 -Finalize Design for the following screens:
-	-Main
-	-About
 	-Record
 	-Record Sound
 	-Record Light
