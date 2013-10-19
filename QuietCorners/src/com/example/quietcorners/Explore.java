@@ -1,6 +1,7 @@
 package com.example.quietcorners;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class Explore extends FragmentActivity {
     private GoogleMap map;
@@ -22,13 +24,17 @@ public class Explore extends FragmentActivity {
         setContentView(R.layout.explore_activity);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        AttemptToInstantiateMap();
+
+        //If the map is instantiated, do stuff related to the map
+        if (AttemptToInstantiateMap()) {
+            SetMarkerClickListenerEvent();
+        }
     }
 
     //Start a location listener
     LocationListener onLocationChange = new LocationListener() {
         public void onLocationChanged(Location loc) {
-            //Move and Zoom the Camera to the current location
+            //Move and Zoom the Camera to the current location and add markers to the map
             LatLng coordinate = LocationMethods.GetCoordinate(loc);
             LocationMethods.MoveAndZoomCameraToCoordinate(map, coordinate);
             LocationMethods.AddRandomMarkersToMapNearCurrentPosition(map, coordinate, 10);
@@ -62,16 +68,34 @@ public class Explore extends FragmentActivity {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10000.0f, onLocationChange);
     }
 
-    public void AttemptToInstantiateMap() {
+    public boolean AttemptToInstantiateMap() {
+        boolean mapHasStarted = false;
+
         if(LocationMethods.AreGooglePlayServicesValid(this))
         {
             map = ((SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map)).getMap();
             map.setMyLocationEnabled(true);
+            mapHasStarted = true;
         }
         else
         {
-            LocationMethods.ShowUnavailableServicesDialogue("s",  Explore.this);
+            LocationMethods.ShowUnavailableServicesDialogue(getResources().getString(R.string.error_getting_maps), Explore.this);
         }
+
+        return mapHasStarted;
+    }
+
+    private void SetMarkerClickListenerEvent() {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(final Marker marker) {
+                Intent i = new Intent(Explore.this, LocationDetails.class);
+                startActivity(i);
+                return true;
+            }
+
+        });
     }
 }
+
