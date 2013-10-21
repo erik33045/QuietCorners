@@ -16,11 +16,20 @@ import java.util.Random;
 
 public class LocationMethods {
     public static void MoveAndZoomCameraToCoordinate(GoogleMap map, LatLng coordinate) {
-        CameraUpdate center = CameraUpdateFactory.newLatLng(coordinate);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+        MoveCameraToCoordinate(map, coordinate);
 
-        map.moveCamera(center);
+        //Zooming to 15, seems to be a good level to indicate location
+        ZoomCameraToLevel(map, 15);
+    }
+
+    public static void ZoomCameraToLevel(GoogleMap map, int level) {
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(level);
         map.animateCamera(zoom);
+    }
+
+    public static void MoveCameraToCoordinate(GoogleMap map, LatLng coordinate) {
+        CameraUpdate center = CameraUpdateFactory.newLatLng(coordinate);
+        map.moveCamera(center);
     }
 
     public static LatLng GetCoordinate(Location loc) {
@@ -33,7 +42,7 @@ public class LocationMethods {
 
     public static void AddRandomMarkersToMapNearCurrentPosition(GoogleMap map, LatLng position, int numberToGenerate) {
         for (int i = 0; i < numberToGenerate; i++) {
-            map.addMarker(new MarkerOptions().position(new LatLng(position.latitude + GenerateRandomDouble(), position.longitude + GenerateRandomDouble())));
+            AddMarkerToMap(map, new LatLng(position.latitude + GenerateRandomDouble(), position.longitude + GenerateRandomDouble()), "" + (i + 1));
         }
     }
 

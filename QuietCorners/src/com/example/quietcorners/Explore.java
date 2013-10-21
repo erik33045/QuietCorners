@@ -27,7 +27,7 @@ public class Explore extends FragmentActivity {
 
         //If the map is instantiated, do stuff related to the map
         if (AttemptToInstantiateMap()) {
-            SetMarkerClickListenerEvent();
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, onLocationChange);
         }
     }
 
@@ -65,7 +65,7 @@ public class Explore extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10000.0f, onLocationChange);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, onLocationChange);
     }
 
     public boolean AttemptToInstantiateMap() {
@@ -76,6 +76,8 @@ public class Explore extends FragmentActivity {
             map = ((SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map)).getMap();
             map.setMyLocationEnabled(true);
+            SetMarkerClickListenerEvent();
+            MoveCameraToTampa();
             mapHasStarted = true;
         }
         else
@@ -96,6 +98,11 @@ public class Explore extends FragmentActivity {
             }
 
         });
+    }
+
+    private void MoveCameraToTampa() {
+        LatLng tampa = new LatLng(27.9710, -82.4650);
+        LocationMethods.MoveCameraToCoordinate(map, tampa);
     }
 }
 

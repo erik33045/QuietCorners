@@ -25,4 +25,6 @@
     <string name="team">The Team</string>
     <string name="contact">Contact: erikh1@mail.usf.edu</string>
     <string name="lumen_title">Record Light</string>
+    <string name="light_measurement">Light Measurement</string>
+    <string name="save">Save</string>
 </resources>
