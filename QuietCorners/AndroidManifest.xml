@@ -69,13 +69,16 @@
         <activity
             android:name=".Confirm"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <!-- Picture Recording Activity  -Commenting this out until the activity exists
+        <!-- Picture Recording Activity  -->
          <activity
              android:name=".PicRecord"
-             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/> -->
+             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+        <!-- LocationDetails Activity -->
         <activity
             android:name=".LocationDetails"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity android:name=".LumenRecord" />
+        <activity android:name=".LumenRecord" />
         <!-- This is our Map API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

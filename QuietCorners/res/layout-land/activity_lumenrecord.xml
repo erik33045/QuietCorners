@@ -3,16 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".SoundRecord">
+    tools:context=".LumenRecord">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lumen Record Page Placeholder"
+        android:text="Light Measurement"
         android:textColor="@color/background_text"
         android:textIsSelectable="false"
         android:textSize="@dimen/text_heading_height"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView3" />
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/background_text"
+        android:textSize="25dp"
+        android:layout_below="@+id/reading"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+    <TextView
+        android:id="@+id/reading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/background_text"
+        android:textSize="25dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 </RelativeLayout>
