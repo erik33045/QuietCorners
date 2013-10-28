@@ -106,8 +106,26 @@ public class Record extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Record.this, PicRecord.class);
-                startActivity(i);
+                //Intent i = new Intent(Record.this, PicRecord.class);
+                //startActivity(i);
+
+                //This is my button click to test the insert in the database. Clean this up later.
+                SaveCommentAndCornerToDatabase();
+            }
+
+            private void SaveCommentAndCornerToDatabase() {
+                Comment comment = new Comment();
+                comment.CornerId = 12;
+                comment.Comment = "This is a comment created from Android.";
+                Corner.SaveCommentToDatabase(comment);
+                Corner corner = new Corner();
+                corner.Lat = 27.456478894;
+                corner.Lng = 87.464834684;
+                corner.LightRating = 5;
+                corner.QuietRating = 5;
+                corner.HasOpenNetwork = false;
+                corner.OverallRating = 5;
+                Corner.saveCornerToDatabase(corner);
             }
         });
     }
