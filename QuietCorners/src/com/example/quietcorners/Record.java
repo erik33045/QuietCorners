@@ -117,7 +117,7 @@ public class Record extends Activity {
                 Comment comment = new Comment();
                 comment.CornerId = 12;
                 comment.Comment = "This is a comment created from Android.";
-                Corner.SaveCommentToDatabase(comment);
+                Corner.SaveComment(comment);
                 Corner corner = new Corner();
                 corner.Lat = 27.456478894;
                 corner.Lng = 87.464834684;
@@ -125,7 +125,7 @@ public class Record extends Activity {
                 corner.QuietRating = 5;
                 corner.HasOpenNetwork = false;
                 corner.OverallRating = 5;
-                Corner.saveCornerToDatabase(corner);
+                Corner.SaveCorner(corner);
             }
         });
     }
