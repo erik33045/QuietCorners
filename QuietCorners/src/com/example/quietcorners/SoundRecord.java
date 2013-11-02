@@ -3,18 +3,7 @@ package com.example.quietcorners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-
-import android.media.AudioRecord;
-
 import android.media.MediaRecorder;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SoundRecord extends Activity {
+    TextView decibels = (TextView)findViewById(R.id.decibels);
     MediaRecorder decRecorder;
     private static double ema = 0.0;
 
@@ -30,7 +20,9 @@ public class SoundRecord extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soundrecord);
 
+        startRecord(); //Go ahead and start the recorder on creation.
     }
+
     protected void onResume() {
         super.onResume();
         startRecord();
@@ -57,6 +49,10 @@ public class SoundRecord extends Activity {
 
             decRecorder.start();
         }
+    }
+
+    public void updateDisplay() {
+        decibels.setText("   Recording: " + Double.toString(getAmplitude()) + " dB");
     }
 
     public void stopRecord() {
