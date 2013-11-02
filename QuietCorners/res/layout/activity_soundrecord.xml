@@ -8,11 +8,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decibel Page Placeholder"
+        android:text="@string/decibel_measurement"
         android:textColor="@color/background_text"
         android:textIsSelectable="false"
         android:textSize="@dimen/text_heading_height"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/decibels"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textSize="25dp" />
 
 </RelativeLayout>

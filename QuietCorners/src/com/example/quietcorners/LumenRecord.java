@@ -24,13 +24,13 @@ public class LumenRecord extends Activity {
         textMax = (TextView)findViewById(R.id.max);
         textReading = (TextView)findViewById(R.id.reading);
 
+
         GetSaveButtonAndBindClickEvent();
 
         SensorManager sensorManager
                 = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         Sensor lightSensor
                 = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-
         if (lightSensor == null){
             Toast.makeText(LumenRecord.this,
                     "No Light Sensor! quit-",
