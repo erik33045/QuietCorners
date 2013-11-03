@@ -262,7 +262,7 @@ public class Corner {
         });
         thread.start();
 
-        //OK, this is probably the worst line in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
+        //OK, this is probably the worst line of code in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
         while (array[0].length() == 0)
             ;
         return array[0];

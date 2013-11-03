@@ -112,7 +112,6 @@ public class Record extends Activity {
                 //startActivity(i);
 
                 //This is my button click to test the insert in the database. Clean this up later.
-
                 TestDatabaseSave();
                 TestDatabaseLoad();
             }
