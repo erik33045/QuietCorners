@@ -11,22 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SoundRecord extends Activity {
-    TextView decibels = (TextView)findViewById(R.id.decibels);
+    TextView decibels;
     MediaRecorder decRecorder;
     private static double ema = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        decibels = (TextView)findViewById(R.id.decibels);
         setContentView(R.layout.activity_soundrecord);
 
-        startRecord(); //Go ahead and start the recorder on creation.
+        //startRecord(); //Go ahead and start the recorder on creation.
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         startRecord();
     }
+    @Override
     protected void onPause() {
         super.onPause();
         stopRecord();
@@ -40,15 +43,15 @@ public class SoundRecord extends Activity {
             decRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             decRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             decRecorder.setOutputFile("/debug/null");
-
-            try {
-                decRecorder.prepare();
-            } catch (java.io.IOException ioe) {
-                //nothing for now
-            }
-
-            decRecorder.start();
         }
+
+        try {
+            decRecorder.prepare();
+        } catch (java.io.IOException ioe) {
+            Toast.makeText(SoundRecord.this, "prepare() failed", Toast.LENGTH_LONG).show();
+        }
+
+        decRecorder.start();
     }
 
     public void updateDisplay() {
@@ -61,6 +64,11 @@ public class SoundRecord extends Activity {
             decRecorder.release();
             decRecorder = null;
         }
+    }
+
+    private void UpdateOnSaveClick() {
+        Intent i =  new Intent(SoundRecord.this, Record.class);
+        startActivity(i);
     }
 
     public double getDecibels(double amp) {
