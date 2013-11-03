@@ -9,12 +9,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -22,6 +22,19 @@ class Comment {
     public int Id;
     public int CornerId;
     public String Comment;
+
+    Comment() {
+    }
+
+    Comment(JSONObject json) {
+        try {
+            Id = json.getInt("Id");
+            CornerId = json.getInt("CornerId");
+            Comment = json.getString("Comment");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 enum Intent {
@@ -42,7 +55,19 @@ public class Corner {
     public int LightRating;
     public boolean HasOpenNetwork;
     public int OverallRating;
-    // public List<Comment> Comments;
+
+    public Corner() {
+    }
+
+    public Corner(JSONObject json) throws JSONException {
+        Id = json.getInt("Id");
+        Lat = json.getDouble("Lat");
+        Lng = json.getDouble("Lng");
+        QuietRating = json.getInt("QuietRating");
+        LightRating = json.getInt("LightRating");
+        HasOpenNetwork = (json.getString("HasOpenNetwork").equals("1"));
+        OverallRating = json.getInt("OverallRating");
+    }
 
     public static int SaveComment(Comment comment) {
         try {
@@ -67,19 +92,21 @@ public class Corner {
     public static Comment LoadComment(int id) {
         try {
             String query = CreateGetCommentByIdQueryString(id);
-            JSONObject json = AccessURLReturnJSON(query);
-            return new Comment();
+            JSONArray array = AccessURLReturnJSON(query);
+            return new Comment(array.getJSONObject(0));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new Comment();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     public static ArrayList<Comment> LoadCommentsByCornerId(int cornerId) {
         try {
             String query = CreateGetCommentsByCornerIdQueryString(cornerId);
-            JSONObject json = AccessURLReturnJSON(query);
-            return new ArrayList<Comment>();
+            JSONArray array = AccessURLReturnJSON(query);
+            return Corner.GetCommentsFromJSONArray(array);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return new ArrayList<Comment>();
@@ -89,19 +116,21 @@ public class Corner {
     public static Corner LoadCorner(int id) {
         try {
             String query = CreateGetCornerByIdQueryString(id);
-            JSONObject json = AccessURLReturnJSON(query);
-            return new Corner();
+            JSONArray array = AccessURLReturnJSON(query);
+            return new Corner(array.getJSONObject(0));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new Corner();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     public static ArrayList<Corner> LoadCornersWithinRange(LatLng location, double range) {
         try {
             String query = CreateGetCornersWithinRangeQueryString(location, range);
-            JSONObject json = AccessURLReturnJSON(query);
-            return new ArrayList<Corner>();
+            JSONArray array = AccessURLReturnJSON(query);
+            return Corner.GetCornersFromJSONArray(array);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return new ArrayList<Corner>();
@@ -111,8 +140,9 @@ public class Corner {
     public static ArrayList<Corner> LoadAllCorners() {
         try {
             String query = CreateGetAllCornersQueryString();
-            JSONObject json = AccessURLReturnJSON(query);
-            return new ArrayList<Corner>();
+            JSONArray array = AccessURLReturnJSON(query);
+            return Corner.GetCornersFromJSONArray(array);
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return new ArrayList<Corner>();
@@ -155,7 +185,36 @@ public class Corner {
         return "?Intent=" + Intent.LoadAllCorners.toString();
     }
 
-    //THAR BE DRAGONS AHEAD! Don't screw with anything below this comment unless you want to spend hours debugging
+    private static ArrayList<Corner> GetCornersFromJSONArray(JSONArray array) {
+        ArrayList<Corner> corners = new ArrayList<Corner>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                corners.add(new Corner(array.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return corners;
+    }
+
+    private static ArrayList<Comment> GetCommentsFromJSONArray(JSONArray array) {
+        ArrayList<Comment> comments = new ArrayList<Comment>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                comments.add(new Comment(array.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return comments;
+    }
+
+
+    //THERE BE DRAGONS AHEAD! Don't screw with anything below this comment unless you want to spend hours debugging
     private static int AccessURLNoReturnData(final String queryString) throws UnsupportedEncodingException {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -181,16 +240,14 @@ public class Corner {
         return 0;
     }
 
-    private static JSONObject AccessURLReturnJSON(final String queryString) throws UnsupportedEncodingException {
-        final JSONObject[] json = new JSONObject[1];
+    private static JSONArray AccessURLReturnJSON(final String queryString) throws UnsupportedEncodingException {
+        final JSONArray[] array = {new JSONArray()};
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     try {
-                        InputStream inputStream = PerformHTTPGetAndReturnInputStream(queryString);
-                        json[0] = new JSONObject(ParseReturnString(inputStream));
-
+                        array[0] = PerformHTTPGetAndReturnJSONArray(queryString);
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     } catch (ClientProtocolException e) {
@@ -204,28 +261,22 @@ public class Corner {
             }
         });
         thread.start();
-        return json[0];
+
+        //OK, this is probably the worst line in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
+        while (array[0].length() == 0)
+            ;
+        return array[0];
     }
 
-    private static InputStream PerformHTTPGetAndReturnInputStream(String queryString) throws IOException {
+    private static JSONArray PerformHTTPGetAndReturnJSONArray(String queryString) throws IOException, JSONException {
         DefaultHttpClient httpClient;
         httpClient = new DefaultHttpClient();
         HttpUriRequest request = new HttpGet("http://www.erik33045.webuda.com/default.php" + queryString);
         HttpResponse response;
         response = httpClient.execute(request);
         HttpEntity entity = response.getEntity();
-        return entity.getContent();
-    }
-
-    private static String ParseReturnString(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        return sb.toString();
+        String entityString = EntityUtils.toString(entity);
+        return new JSONArray(entityString);
     }
 }
 

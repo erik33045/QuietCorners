@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 public class Record extends Activity {
     LocationManager locationManager = null;
 
@@ -110,10 +112,20 @@ public class Record extends Activity {
                 //startActivity(i);
 
                 //This is my button click to test the insert in the database. Clean this up later.
-                SaveCommentAndCornerToDatabase();
+
+                TestDatabaseSave();
+                TestDatabaseLoad();
             }
 
-            private void SaveCommentAndCornerToDatabase() {
+            private void TestDatabaseLoad() {
+                Comment comment = Corner.LoadComment(14);
+                Corner corner = Corner.LoadCorner(10);
+                ArrayList<Comment> comments = Corner.LoadCommentsByCornerId(12);
+                ArrayList<Corner> corners = Corner.LoadCornersWithinRange(new LatLng(0, 0), 200);
+                corners = Corner.LoadAllCorners();
+            }
+
+            private void TestDatabaseSave() {
                 Comment comment = new Comment();
                 comment.CornerId = 12;
                 comment.Comment = "This is a comment created from Android.";
