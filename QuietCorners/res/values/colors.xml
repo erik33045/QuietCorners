@@ -1,9 +1,9 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-    <color name="background">#cccccc</color>
+    <color name="background">#994D00</color>
     <color name="background_text">#33b5e5</color>
     <color name="background_menu">#0099cc</color>
-    <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
+    <color name="text">#000000</color>
+    <color name="text2">#FF8A14</color>
 </resources>
