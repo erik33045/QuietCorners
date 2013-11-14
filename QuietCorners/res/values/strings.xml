@@ -28,4 +28,9 @@
     <string name="light_measurement">Light Measurement</string>
     <string name="decibel_measurement">Decibel Measurement</string>
     <string name="save">Save</string>
+    <string name="Coments">Comments</string>
+    <string name="Brightness">Brightness</string>
+    <string name="noiselessness">Noiselessness</string>
+    <string name="OverallRating">Overall Rating</string>
+    <string name="hasOpenWifi">Has Open Wifi</string>
 </resources>
