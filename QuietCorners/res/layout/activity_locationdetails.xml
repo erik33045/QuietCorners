@@ -8,7 +8,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Brightness"
                 android:id="@+id/textView"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/text" />
 
@@ -37,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
                     android:numStars="5"
-                    android:rating="3.5"
+                    android:rating="0"
                     android:isIndicator="false"
                     style="@style/foodRatingBar" />
             </RelativeLayout>
@@ -73,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
                     android:numStars="5"
-                    android:rating="3.5"
+                    android:rating="0"
                     android:isIndicator="false" />
             </RelativeLayout>
         </LinearLayout>
@@ -107,7 +109,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text=""
                     android:layout_alignParentRight="true"
-                    android:id="@+id/textView5"
+                    android:id="@+id/txtHasOpenNetwork"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/background" />
             </RelativeLayout>
@@ -143,9 +145,53 @@
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
                     android:numStars="5"
-                    android:rating="3.5"
+                    android:rating="0"
                     android:isIndicator="false" />
             </RelativeLayout>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/picture"
+            android:minHeight="200dp"
+            android:minWidth="400dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/black_overlay"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/pictureDescription" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Coments"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/text"
+        android:layout_marginTop="10dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvComments"
+        android:background="@color/black_overlay"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:smoothScrollbar="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addComment"
+        android:id="@+id/addComment"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_alignRight="@+id/lvComments" />
+
 </RelativeLayout>

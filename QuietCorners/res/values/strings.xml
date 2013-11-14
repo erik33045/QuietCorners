@@ -33,4 +33,6 @@
     <string name="noiselessness">Noiselessness</string>
     <string name="OverallRating">Overall Rating</string>
     <string name="hasOpenWifi">Has Open Wifi</string>
+    <string name="addComment">Add Comment</string>
+    <string name="pictureDescription">A picture of the corner</string>
 </resources>

@@ -55,6 +55,7 @@ public class Corner {
     public int LightRating;
     public boolean HasOpenNetwork;
     public int OverallRating;
+    public ArrayList<Comment> Comments;
 
     public Corner() {
     }
@@ -263,6 +264,7 @@ public class Corner {
         thread.start();
 
         //OK, this is probably the worst line of code in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
+        //noinspection StatementWithEmptyBody
         while (array[0].length() == 0)
             ;
         return array[0];
