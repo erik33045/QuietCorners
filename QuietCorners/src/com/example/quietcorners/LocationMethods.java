@@ -12,7 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 public class LocationMethods {
     public static void MoveAndZoomCameraToCoordinate(GoogleMap map, LatLng coordinate) {
@@ -40,21 +40,15 @@ public class LocationMethods {
         map.addMarker(new MarkerOptions().position(position).title(title));
     }
 
-    public static void AddRandomMarkersToMapNearCurrentPosition(GoogleMap map, LatLng position, int numberToGenerate) {
-        for (int i = 0; i < numberToGenerate; i++) {
-            AddMarkerToMap(map, new LatLng(position.latitude + GenerateRandomDouble(), position.longitude + GenerateRandomDouble()), "" + (i + 1));
+    public static void AddCornersToMapNearCurrentPosition(GoogleMap map, LatLng position) {
+        ArrayList<Corner> corners = Corner.LoadCornersWithinRange(position, 10);
+
+        for (Corner corner : corners) {
+            AddMarkerToMap(map, new LatLng(corner.Lat, corner.Lng), "" + corner.Id);
         }
     }
 
-    private static double GenerateRandomDouble() {
-        Random r = new Random();
-        //Generate random number from 0 to 0.0075
-        double randDouble = (((double) r.nextInt(75)) / 10000);
-        //If true, make it negative, total range of -0.0075 to 0.0075
-        return r.nextBoolean() ? -randDouble : randDouble;
-    }
-
-    public static void ShowUnavailableServicesDialogue(String errorMessage, Context c ) {
+    public static void ShowUnavailableServicesDialogue(String errorMessage, Context c) {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setMessage(errorMessage);
         builder.setCancelable(true);
