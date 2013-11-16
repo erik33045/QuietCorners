@@ -189,25 +189,28 @@ public class Corner {
     private static ArrayList<Corner> GetCornersFromJSONArray(JSONArray array) {
         ArrayList<Corner> corners = new ArrayList<Corner>();
 
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                corners.add(new Corner(array.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (array.length() > 0) {
+            for (int i = 0; i < array.length(); i++) {
+                try {
+                    corners.add(new Corner(array.getJSONObject(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
         return corners;
     }
 
     private static ArrayList<Comment> GetCommentsFromJSONArray(JSONArray array) {
         ArrayList<Comment> comments = new ArrayList<Comment>();
 
-        for (int i = 0; i < array.length(); i++) {
-            try {
-                comments.add(new Comment(array.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (array.length() > 0) {
+            for (int i = 0; i < array.length(); i++) {
+                try {
+                    comments.add(new Comment(array.getJSONObject(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -241,14 +244,23 @@ public class Corner {
         return 0;
     }
 
+
     private static JSONArray AccessURLReturnJSON(final String queryString) throws UnsupportedEncodingException {
         final JSONArray[] array = {new JSONArray()};
+        final boolean[] canProceed = {false};
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     try {
-                        array[0] = PerformHTTPGetAndReturnJSONArray(queryString);
+                        JSONArray returnArray = PerformHTTPGetAndReturnJSONArray(queryString);
+                        if (returnArray.length() < 1) {
+                            array[0] = new JSONArray("[]");
+                            canProceed[0] = true;
+                        } else {
+                            array[0] = returnArray;
+                            canProceed[0] = true;
+                        }
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     } catch (ClientProtocolException e) {
@@ -265,7 +277,7 @@ public class Corner {
 
         //OK, this is probably the worst line of code in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
         //noinspection StatementWithEmptyBody
-        while (array[0].length() == 0)
+        while (!canProceed[0])
             ;
         return array[0];
     }

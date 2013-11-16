@@ -37,7 +37,7 @@ public class Explore extends FragmentActivity {
             //Move and Zoom the Camera to the current location and add markers to the map
             LatLng coordinate = LocationMethods.GetCoordinate(loc);
             LocationMethods.MoveAndZoomCameraToCoordinate(map, coordinate);
-            LocationMethods.AddRandomMarkersToMapNearCurrentPosition(map, coordinate, 10);
+            LocationMethods.AddCornersToMapNearCurrentPosition(map, coordinate);
         }
 
         public void onProviderDisabled(String provider) {
@@ -71,17 +71,14 @@ public class Explore extends FragmentActivity {
     public boolean AttemptToInstantiateMap() {
         boolean mapHasStarted = false;
 
-        if(LocationMethods.AreGooglePlayServicesValid(this))
-        {
+        if (LocationMethods.AreGooglePlayServicesValid(this)) {
             map = ((SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map)).getMap();
             map.setMyLocationEnabled(true);
             SetMarkerClickListenerEvent();
             MoveCameraToTampa();
             mapHasStarted = true;
-        }
-        else
-        {
+        } else {
             LocationMethods.ShowUnavailableServicesDialogue(getResources().getString(R.string.error_getting_maps), Explore.this);
         }
 
@@ -93,6 +90,7 @@ public class Explore extends FragmentActivity {
             @Override
             public boolean onMarkerClick(final Marker marker) {
                 Intent i = new Intent(Explore.this, LocationDetails.class);
+                i.putExtra("CornerId", marker.getTitle());
                 startActivity(i);
                 return true;
             }
