@@ -25,6 +25,9 @@ public class WifiTest extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifitest);
 
+        Button testWifiButton = (Button) findViewById(R.id.test_wifi);
+        testWifiButton.setEnabled(false);
+
         GetSaveButtonAndBindClickEvent();
 
         final WifiManager wifiTester = (WifiManager)getSystemService(Context.WIFI_SERVICE);
@@ -33,9 +36,11 @@ public class WifiTest extends Activity {
             Toast.makeText(WifiTest.this, "Wifi-enabled", Toast.LENGTH_LONG).show();
             Log.d("WifiTest", "WifiTest.isWifiEnabled() — true ");
             wifiTester.startScan();
+            testWifiButton.setEnabled(true);
         }
     }
 
+    /* Main utility function to retrieve the signal strength. */
     private int getSignalStrength() {
         int signal = -1;
 
@@ -72,6 +77,7 @@ public class WifiTest extends Activity {
         return signal;
     }
 
+    /* Needed to prevent division by zero. */
     private int calculateSignalLevel(int rssi, int numLevels) {
         if(rssi <= MIN_RSSI) {
             return 0;
