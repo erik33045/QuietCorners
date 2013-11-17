@@ -19,6 +19,8 @@ public class WifiTest extends Activity {
     private static final int MIN_RSSI = -100;
     /** Anything better than or equal to this will show the max bars. */
     private static final int MAX_RSSI = -55;
+    private boolean wifiEnabled = false;
+    private int wifiRating = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class WifiTest extends Activity {
         Button testWifiButton = (Button) findViewById(R.id.test_wifi);
         testWifiButton.setEnabled(false);
 
+        GetRecordButtonAndBindClickEvent();
         GetSaveButtonAndBindClickEvent();
 
         final WifiManager wifiTester = (WifiManager)getSystemService(Context.WIFI_SERVICE);
@@ -52,7 +55,7 @@ public class WifiTest extends Activity {
 
     /* Main utility function to retrieve the signal strength. */
     private int getSignalStrength() {
-        int signal = -1;
+        int signal = 0;
 
         final WifiManager wifiTester = (WifiManager)getSystemService(Context.WIFI_SERVICE);
         int state = wifiTester.getWifiState();
@@ -72,12 +75,14 @@ public class WifiTest extends Activity {
                         // Convert strength into percentage
                         int difference = level * 100 / point.level;
                         if(difference >= 100)
+                            signal = 5;
+                        else if(difference >= 80)
                             signal = 4;
-                        else if(difference >= 75)
+                        else if(difference >= 60)
                             signal = 3;
-                        else if(difference >= 50)
+                        else if(difference >= 40)
                             signal = 2;
-                        else if(difference >= 25)
+                        else if(difference >= 20)
                             signal = 1;
                     }
                 }
@@ -102,7 +107,7 @@ public class WifiTest extends Activity {
         return 0;
     }
 
-    private void GetSaveButtonAndBindClickEvent() {
+    private void GetRecordButtonAndBindClickEvent() {
         Button button = (Button) findViewById(R.id.test_wifi);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,17 +117,34 @@ public class WifiTest extends Activity {
         });
     }
 
+    private void GetSaveButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.sav_Wifi);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CalculateRating();
+                Intent i = new Intent(WifiTest.this, Record.class);
+                startActivity(i);
+            }
+        });
+    }
+
     private void UpdateDisplay() {
         int signalStrength = getSignalStrength();
         if (signalStrength != -1) {
             wifiText.setText("   Signal: " + String.valueOf(signalStrength) + " bars");
+            wifiEnabled = true;
         }
         else {
             wifiText.setText("   Signal: None");
+            wifiEnabled = false;
         }
+        wifiRating = signalStrength;
     }
 
     private void CalculateRating() {
-
+        Variables application = (Variables)getApplication();
+        application.internetRating = wifiRating;
+        application.openNetwork = wifiEnabled;
     }
 }

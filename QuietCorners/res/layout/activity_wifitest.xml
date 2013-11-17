@@ -37,13 +37,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp" />
 
-    <RatingBar
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        style="@style/foodRatingBar"
-        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:id="@+id/sav_Wifi"
+        android:layout_below="@+id/rec_Wifi"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp" />
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>

@@ -35,4 +35,12 @@
         android:layout_below="@+id/test_wifi"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/sav_Wifi"
+        android:layout_below="@+id/rec_Wifi"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
