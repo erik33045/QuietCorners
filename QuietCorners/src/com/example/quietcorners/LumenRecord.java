@@ -76,7 +76,7 @@ public class LumenRecord extends Activity {
                     if(max>1000) rating = 5;
                     if(max>10000) rating = 4;
                     RatingBar lightRatingBar = (RatingBar) findViewById(R.id.rtbLightRating);
-                    lightRatingBar.setRating(max);
+                    lightRatingBar.setRating(rating);
                     }
                     textReading.setText("   Current Reading: " + String.valueOf(currentReading));
             }
