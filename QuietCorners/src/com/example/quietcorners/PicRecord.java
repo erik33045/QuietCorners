@@ -45,6 +45,8 @@ public class PicRecord extends Activity {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
 
             bmp = (Bitmap) data.getExtras().get("data");
+            bmp = BitmapFactory.decodeByteArray(GetByteArrayFromBitmap(bmp), 0,
+                    GetByteArrayFromBitmap(bmp).length);
 
             /*image.setImageBitmap(bmp);
             confirmPictureButton.requestFocus();
@@ -75,17 +77,10 @@ public class PicRecord extends Activity {
             button.setOnClickListener(new View.OnClickListener(){
                @Override
                        public void onClick(View view){
-                            Intent in = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            in.putExtra("crop", "true");
-                            in.putExtra("outputX", 100);
-                            in.putExtra("outputY", 100);
-                            in.putExtra("scale", true);
-                            in.putExtra("return-data", true);
-
-                            startActivityForResult(in, 1);
-                            GetByteArrayFromBitmap(bmp);
+                            Variables application = (Variables)getApplication();
+                            application.cornerBitmap = bmp;
+                            Intent i = new Intent(PicRecord.this, Record.class);
+                            startActivity(i);
                         }
 
                 });
@@ -102,3 +97,15 @@ public class PicRecord extends Activity {
     }
 }
 
+/*Crop Stuff
+Intent in = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            in.putExtra("crop", "true");
+                            in.putExtra("outputX", 100);
+                            in.putExtra("outputY", 100);
+                            in.putExtra("scale", true);
+                            in.putExtra("return-data", true);
+
+                            startActivityForResult(in, 1);
+ */

@@ -2,6 +2,7 @@ package com.example.quietcorners;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.graphics.Bitmap;
 
 public class Confirm extends Activity {
     @Override
