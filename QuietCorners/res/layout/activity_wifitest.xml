@@ -27,4 +27,14 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Signal: None"
+        android:id="@+id/rec_Wifi"
+        android:layout_below="@+id/test_wifi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
+
 </RelativeLayout>

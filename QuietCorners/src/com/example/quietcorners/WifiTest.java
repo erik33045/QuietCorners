@@ -14,9 +14,9 @@ import android.widget.Toast;
 import java.util.List;
 
 public class WifiTest extends Activity {
+    TextView wifiText;
     /** Anything worse than or equal to this will show 0 bars. */
     private static final int MIN_RSSI = -100;
-
     /** Anything better than or equal to this will show the max bars. */
     private static final int MAX_RSSI = -55;
 
@@ -24,6 +24,7 @@ public class WifiTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifitest);
+        wifiText = (TextView)findViewById(R.id.rec_Wifi);
 
         Button testWifiButton = (Button) findViewById(R.id.test_wifi);
         testWifiButton.setEnabled(false);
@@ -103,7 +104,13 @@ public class WifiTest extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(WifiTest.this, "Wifi strength: " + getSignalStrength(), Toast.LENGTH_LONG).show();
+                int signalStrength = getSignalStrength();
+                if (signalStrength != -1) {
+                    wifiText.setText("   Signal: " + String.valueOf(signalStrength) + " bars");
+                }
+                else {
+                    wifiText.setText("   Signal: None");
+                }
             }
         });
     }

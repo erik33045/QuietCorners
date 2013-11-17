@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class SoundRecord extends Activity {
     TextView decibels;
     MediaRecorder decRecorder = null;
@@ -59,9 +61,9 @@ public class SoundRecord extends Activity {
     }
 
     public void updateDisplay() {
-        double value = getAmplitude();
-        if (decibels == null) Toast.makeText(SoundRecord.this, "its null", Toast.LENGTH_LONG).show();
-        else decibels.setText("   Recording: " + String.valueOf(value) + " dB");
+        double value = getDecibels();
+        DecimalFormat df = new DecimalFormat("#.##");
+        decibels.setText("   Recording: " + String.valueOf(df.format(value)) + " dB");
     }
 
     public void stopRecord() {
@@ -87,8 +89,8 @@ public class SoundRecord extends Activity {
         startActivity(i);
     }
 
-    public double getDecibels(double amp) {
-        return 20 * Math.log10(getAmplitude() / amp);
+    public double getDecibels() {
+        return -1 * 20 * Math.log10(getAmplitude() / 32767.0);
     }
 
     public double getAmplitude() {
