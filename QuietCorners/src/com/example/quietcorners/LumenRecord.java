@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RatingBar;
 
 public class LumenRecord extends Activity {
     TextView textMax, textReading;
@@ -36,7 +37,7 @@ public class LumenRecord extends Activity {
                 = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         if (lightSensor == null){
             Toast.makeText(LumenRecord.this,
-                    "No Light Sensor! quit-",
+                    "No light sensor.  Rate manually.",
                     Toast.LENGTH_LONG).show();
         }else{
             sensorManager.registerListener(lightSensorEventListener,
@@ -67,7 +68,15 @@ public class LumenRecord extends Activity {
                 float currentReading = event.values[0];
                 if (currentReading > max){
                     max =  event.values[0];
-                    textMax.setText("   Max Reading: " + String.valueOf(max));
+                    //Rating conversion
+                    if (max == 0.0) rating = 0;
+                    if (max > 0.0) rating = 1;
+                    if(max>50) rating = 2;
+                    if(max>100) rating = 3;
+                    if(max>1000) rating = 5;
+                    if(max>10000) rating = 4;
+                    RatingBar lightRatingBar = (RatingBar) findViewById(R.id.rtbLightRating);
+                    lightRatingBar.setRating(max);
                     }
                     textReading.setText("   Current Reading: " + String.valueOf(currentReading));
             }
@@ -80,14 +89,6 @@ public class LumenRecord extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Rating conversion
-                if (max == 0.0) rating = 0;
-                if (max > 0.0) rating = 1;
-                if(max>50) rating = 2;
-                if(max>100) rating = 3;
-                if(max>1000) rating = 5;
-                if(max>10000) rating = 4;
 
                 Variables application = (Variables)getApplication();
                 application.lightRating = rating;

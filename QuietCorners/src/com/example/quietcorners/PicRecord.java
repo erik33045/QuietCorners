@@ -46,18 +46,6 @@ public class PicRecord extends Activity {
             bmp = BitmapFactory.decodeByteArray(GetByteArrayFromBitmap(bmp), 0,
                     GetByteArrayFromBitmap(bmp).length);
 
-            /*image.setImageBitmap(bmp);
-            confirmPictureButton.requestFocus();
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] outputChunk = baos.toByteArray();
-            encodedImageString = Base64.encodeToString(outputChunk, Base64.DEFAULT);
-
-            byte[] bytarray = Base64.decode(encodedImageString, Base64.DEFAULT);
-            Bitmap bmimage = BitmapFactory.decodeByteArray(bytarray, 0,
-                    bytarray.length);*/
-
         }
 
     }
