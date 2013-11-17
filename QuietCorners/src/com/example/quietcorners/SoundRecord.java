@@ -61,7 +61,7 @@ public class SoundRecord extends Activity {
     }
 
     public void updateDisplay() {
-        double value = getDecibels();
+        double value = getAmplitude();
         DecimalFormat df = new DecimalFormat("#.##");
         decibels.setText("   Recording: " + String.valueOf(df.format(value)) + " dB");
     }

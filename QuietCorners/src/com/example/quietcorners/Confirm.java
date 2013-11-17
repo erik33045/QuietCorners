@@ -12,6 +12,8 @@ public class Confirm extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        lightReading = (TextView)findViewById(R.id.lightReading);
+
         Variables application = (Variables)getApplication();
 
         lightReading.setText("   Current Reading: " +  application.lightRating);

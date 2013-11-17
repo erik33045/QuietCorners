@@ -121,4 +121,8 @@ public class WifiTest extends Activity {
             wifiText.setText("   Signal: None");
         }
     }
+
+    private void CalculateRating() {
+
+    }
 }

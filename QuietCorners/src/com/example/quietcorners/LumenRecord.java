@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LumenRecord extends Activity {
-    TextView textMax, textReading, lightReading;
+    TextView textMax, textReading;
     float max;
     int rating;
 
@@ -23,6 +23,7 @@ public class LumenRecord extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lumenrecord);
+
         textMax = (TextView)findViewById(R.id.max);
         textReading = (TextView)findViewById(R.id.reading);
 
@@ -90,9 +91,6 @@ public class LumenRecord extends Activity {
 
                 Variables application = (Variables)getApplication();
                 application.lightRating = rating;
-
-                Variables application = (Variables)getApplication();
-                lightReading.setText("   Current Reading: " +  application.lightRating);
 
                 Intent i = new Intent(LumenRecord.this, Record.class);
                 startActivity(i);
