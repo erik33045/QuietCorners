@@ -13,6 +13,16 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/text_heading_height"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cornerPicture"
+        android:layout_marginBottom="42dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_marginRight="35dp" />
 
 </RelativeLayout>

@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
-
 public class Record extends Activity {
     LocationManager locationManager = null;
 
@@ -108,6 +106,17 @@ public class Record extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(Record.this, PicRecord.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    /*private void GetPictureButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.pictureButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 //Intent i = new Intent(Record.this, PicRecord.class);
                 //startActivity(i);
 
@@ -139,7 +148,7 @@ public class Record extends Activity {
                 Corner.SaveCorner(corner);
             }
         });
-    }
+    }*/
 
     private void GetConfirmButtonAndBindClickEvent() {
         Button button = (Button) findViewById(R.id.confirmButton);
