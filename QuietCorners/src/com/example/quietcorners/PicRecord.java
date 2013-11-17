@@ -58,7 +58,7 @@ public class PicRecord extends Activity {
 
     }
 
-    private byte[] GetByteArrayFromBitmap(Bitmap bmp) {
+    public byte[] GetByteArrayFromBitmap(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] outputChunk = baos.toByteArray();

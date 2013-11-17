@@ -3,6 +3,8 @@ package com.example.quietcorners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -155,8 +157,11 @@ public class Record extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Record.this, Confirm.class);
-                startActivity(i);
+                Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+                new Corner().SendImageThroughPOST(new PicRecord().GetByteArrayFromBitmap(image), 38);
+
+                //Intent i = new Intent(Record.this, Confirm.class);
+                //startActivity(i);
             }
         });
     }
