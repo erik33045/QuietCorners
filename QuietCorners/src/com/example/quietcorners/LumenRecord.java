@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 public class LumenRecord extends Activity {
     TextView textMax, textReading;
+    float max;
+    int rating;
 
     /** Called when the activity is first created. */
     @Override
@@ -36,9 +38,6 @@ public class LumenRecord extends Activity {
                     "No Light Sensor! quit-",
                     Toast.LENGTH_LONG).show();
         }else{
-            float max =  lightSensor.getMaximumRange();
-            textMax.setText("   Max Reading: " + String.valueOf(max));
-
             sensorManager.registerListener(lightSensorEventListener,
                     lightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
@@ -65,7 +64,11 @@ public class LumenRecord extends Activity {
             // TODO Auto-generated method stub
             if(event.sensor.getType()==Sensor.TYPE_LIGHT){
                 float currentReading = event.values[0];
-                textReading.setText("   Current Reading: " + String.valueOf(currentReading));
+                if (currentReading > max){
+                    max =  event.values[0];
+                    textMax.setText("   Max Reading: " + String.valueOf(max));
+                    }
+                    textReading.setText("   Current Reading: " + String.valueOf(currentReading));
             }
         }
 
@@ -76,6 +79,17 @@ public class LumenRecord extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Rating conversion
+                if (max = 0) rating = 0;
+                if (max > 0) rating = 1;
+                if(max>50) rating = 2;
+                if(max>100) rating = 3;
+                if(max>1000) rating = 5;
+                if(max>10000) rating = 4;
+
+                Variables application = (Variables)getApplication();
+                application.lightRating = rating;
                 Intent i = new Intent(LumenRecord.this, Record.class);
                 startActivity(i);
             }
