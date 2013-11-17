@@ -9,4 +9,10 @@ public class Confirm extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }

@@ -12,16 +12,20 @@ import android.widget.Toast;
 
 public class SoundRecord extends Activity {
     TextView decibels;
-    MediaRecorder decRecorder;
-    private static double ema = 0.0;
+    MediaRecorder decRecorder = null;
+    private double ema = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        decibels = (TextView)findViewById(R.id.decibels);
         setContentView(R.layout.activity_soundrecord);
+        decibels = (TextView)findViewById(R.id.rec_dB);
 
-        //startRecord(); //Go ahead and start the recorder on creation.
+        if (decibels == null) Toast.makeText(SoundRecord.this, "its null", Toast.LENGTH_LONG).show();
+        else decibels.setText("   Recording: 0.00 dB");
+
+        startRecord(); //Go ahead and start the recorder on creation.
+        GetSaveButtonAndBindClickEvent();
     }
 
     @Override
@@ -29,9 +33,11 @@ public class SoundRecord extends Activity {
         super.onResume();
         startRecord();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         stopRecord();
     }
 
@@ -42,20 +48,20 @@ public class SoundRecord extends Activity {
             decRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             decRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             decRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            decRecorder.setOutputFile("/debug/null");
+            decRecorder.setOutputFile("/dev/null");
+            try {
+                decRecorder.prepare();
+            } catch (java.io.IOException ioe) {
+                Toast.makeText(SoundRecord.this, "prepare() failed", Toast.LENGTH_LONG).show();
+            }
+            decRecorder.start();
         }
-
-        try {
-            decRecorder.prepare();
-        } catch (java.io.IOException ioe) {
-            Toast.makeText(SoundRecord.this, "prepare() failed", Toast.LENGTH_LONG).show();
-        }
-
-        decRecorder.start();
     }
 
     public void updateDisplay() {
-        decibels.setText("   Recording: " + Double.toString(getAmplitude()) + " dB");
+        double value = getAmplitude();
+        if (decibels == null) Toast.makeText(SoundRecord.this, "its null", Toast.LENGTH_LONG).show();
+        else decibels.setText("   Recording: " + String.valueOf(value) + " dB");
     }
 
     public void stopRecord() {
@@ -64,6 +70,16 @@ public class SoundRecord extends Activity {
             decRecorder.release();
             decRecorder = null;
         }
+    }
+
+    private void GetSaveButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.get_sound);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateDisplay();
+            }
+        });
     }
 
     private void UpdateOnSaveClick() {

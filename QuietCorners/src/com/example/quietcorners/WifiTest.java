@@ -40,6 +40,12 @@ public class WifiTest extends Activity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     /* Main utility function to retrieve the signal strength. */
     private int getSignalStrength() {
         int signal = -1;

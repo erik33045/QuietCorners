@@ -46,6 +46,11 @@ public class LumenRecord extends Activity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
     SensorEventListener lightSensorEventListener
             = new SensorEventListener(){
 

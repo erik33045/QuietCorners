@@ -59,8 +59,8 @@ public class Explore extends FragmentActivity {
     public void onPause() {
         super.onPause();
         locationManager.removeUpdates(onLocationChange);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
-
     //reactivates listener when app is resumed
     @Override
     public void onResume() {

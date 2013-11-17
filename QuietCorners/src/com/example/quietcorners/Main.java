@@ -88,6 +88,12 @@ public class Main extends Activity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     private void GetAboutButtonAndBindClickEvent() {
         Button button = (Button) findViewById(R.id.about_button);
         button.setOnClickListener(new View.OnClickListener() {
