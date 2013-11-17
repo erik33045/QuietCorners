@@ -20,7 +20,7 @@ public class LumenRecord extends Activity {
     TextView textMax, textReading;
     float currentReading;
     int rating;
-    RatingBar lightRatingBar = (RatingBar)findViewById(R.id.rtbLightRating);
+    RatingBar lightRatingBar;
 
     /** Called when the activity is first created. */
     @Override
@@ -30,6 +30,7 @@ public class LumenRecord extends Activity {
 
         textMax = (TextView)findViewById(R.id.max);
         textReading = (TextView)findViewById(R.id.reading);
+        lightRatingBar = (RatingBar)findViewById(R.id.rtbLightRating);
 
         SensorManager sensorManager
                 = (SensorManager)getSystemService(Context.SENSOR_SERVICE);

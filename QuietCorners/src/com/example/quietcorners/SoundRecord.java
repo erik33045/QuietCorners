@@ -16,6 +16,7 @@ public class SoundRecord extends Activity {
     TextView decibels;
     MediaRecorder decRecorder = null;
     private double ema = 0.0;
+    private double soundLevel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class SoundRecord extends Activity {
 
         startRecord(); //Go ahead and start the recorder on creation.
         GetSaveButtonAndBindClickEvent();
+        GetRecordButtonAndBindClickEvent();
     }
 
     @Override
@@ -60,12 +62,6 @@ public class SoundRecord extends Activity {
         }
     }
 
-    public void updateDisplay() {
-        double value = getAmplitude();
-        DecimalFormat df = new DecimalFormat("#.##");
-        decibels.setText("   Recording: " + String.valueOf(df.format(value)) + " dB");
-    }
-
     public void stopRecord() {
         if (decRecorder != null) {
             decRecorder.stop();
@@ -79,14 +75,20 @@ public class SoundRecord extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateDisplay();
+                saveRating();
             }
         });
     }
 
-    private void UpdateOnSaveClick() {
-        Intent i =  new Intent(SoundRecord.this, Record.class);
-        startActivity(i);
+    private void GetRecordButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.sav_Sound);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soundLevel = getAmplitude();
+                updateDisplay();
+            }
+        });
     }
 
     public double getDecibels() {
@@ -100,5 +102,26 @@ public class SoundRecord extends Activity {
             ema = 0.6 * amp + (1.0 - 0.6) * ema;
             return ema;
         } else return 0;
+    }
+
+    public void updateDisplay() {
+        double value = getAmplitude();
+        DecimalFormat df = new DecimalFormat("#.##");
+        decibels.setText("   Recording: " + String.valueOf(df.format(value)) + " dB");
+    }
+
+    private void saveRating() {
+        Variables application = (Variables)getApplication();
+        application.soundRating = calculateRating();
+    }
+
+    private int calculateRating() {
+        int rating = 0;
+        if (soundLevel < 1500) rating = 5;
+        if (soundLevel < 3500) rating = 4;
+        if (soundLevel < 6000) rating = 3;
+        if (soundLevel < 90000) rating = 2;
+        if (soundLevel < 150000) rating = 1;
+        return rating;
     }
 }

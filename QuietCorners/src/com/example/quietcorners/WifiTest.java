@@ -42,8 +42,8 @@ public class WifiTest extends Activity {
             testWifiButton.setEnabled(true);
 
             /* Update the display twice to avoid the initial value, 0, of Max_Amplitude() */
-            UpdateDisplay();
-            UpdateDisplay();
+            updateDisplay();
+            updateDisplay();
         }
     }
 
@@ -112,7 +112,7 @@ public class WifiTest extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateDisplay();
+                updateDisplay();
             }
         });
     }
@@ -122,14 +122,14 @@ public class WifiTest extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CalculateRating();
+                saveRating();
                 Intent i = new Intent(WifiTest.this, Record.class);
                 startActivity(i);
             }
         });
     }
 
-    private void UpdateDisplay() {
+    private void updateDisplay() {
         int signalStrength = getSignalStrength();
         if (signalStrength != -1) {
             wifiText.setText("   Signal: " + String.valueOf(signalStrength) + " bars");
@@ -142,7 +142,7 @@ public class WifiTest extends Activity {
         wifiRating = signalStrength;
     }
 
-    private void CalculateRating() {
+    private void saveRating() {
         Variables application = (Variables)getApplication();
         application.internetRating = wifiRating;
         application.openNetwork = wifiEnabled;
