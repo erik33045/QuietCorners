@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 public class PicRecord extends Activity {
 
     private ImageView image;
+    public Bitmap bmp;
     String encodedImageString;
     //Button confirmPictureButton;
     //Button takePictureButton;
@@ -43,10 +44,10 @@ public class PicRecord extends Activity {
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
 
-            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            bmp = (Bitmap) data.getExtras().get("data");
 
-            image.setImageBitmap(bmp);
-            //confirmPictureButton.requestFocus();
+            /*image.setImageBitmap(bmp);
+            confirmPictureButton.requestFocus();
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -55,7 +56,7 @@ public class PicRecord extends Activity {
 
             byte[] bytarray = Base64.decode(encodedImageString, Base64.DEFAULT);
             Bitmap bmimage = BitmapFactory.decodeByteArray(bytarray, 0,
-                    bytarray.length);
+                    bytarray.length);*/
 
         }
 
@@ -84,6 +85,7 @@ public class PicRecord extends Activity {
                             in.putExtra("return-data", true);
 
                             startActivityForResult(in, 1);
+                            GetByteArrayFromBitmap(bmp);
                         }
 
                 });
