@@ -45,8 +45,10 @@ public class PicRecord extends Activity {
             bmp = (Bitmap) data.getExtras().get("data");
             bmp = BitmapFactory.decodeByteArray(GetByteArrayFromBitmap(bmp), 0,
                     GetByteArrayFromBitmap(bmp).length);
+            Variables application = (Variables)getApplication();
+            application.cornerBitmap = bmp;
             image = (ImageView) findViewById(R.id.cornerPicture);
-            image.setImageBitmap(bmp);
+            image.setImageBitmap(application.cornerBitmap);
 
         }
 
