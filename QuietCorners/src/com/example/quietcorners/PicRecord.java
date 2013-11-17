@@ -10,8 +10,6 @@ import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.view.View;
-import android.app.Application;
-
 import java.io.ByteArrayOutputStream;
 
 
@@ -20,8 +18,7 @@ public class PicRecord extends Activity {
     private ImageView image;
     public Bitmap bmp;
     String encodedImageString;
-    //Button confirmPictureButton;
-    //Button takePictureButton;
+
 
 
     private void dispatchTakePictureIntent(int actionCode) {

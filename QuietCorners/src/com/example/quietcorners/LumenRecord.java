@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Application;
 
 public class LumenRecord extends Activity {
     TextView textMax, textReading;
@@ -82,8 +81,8 @@ public class LumenRecord extends Activity {
             public void onClick(View view) {
 
                 //Rating conversion
-                if (max = 0) rating = 0;
-                if (max > 0) rating = 1;
+                if (max == 0.0) rating = 0;
+                if (max > 0.0) rating = 1;
                 if(max>50) rating = 2;
                 if(max>100) rating = 3;
                 if(max>1000) rating = 5;
