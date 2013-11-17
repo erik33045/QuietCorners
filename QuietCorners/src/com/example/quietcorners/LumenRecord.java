@@ -13,11 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RatingBar;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 
 public class LumenRecord extends Activity {
     TextView textMax, textReading;
-    float max;
+    float currentReading;
     int rating;
+    RatingBar lightRatingBar = (RatingBar)findViewById(R.id.rtbLightRating);
 
     /** Called when the activity is first created. */
     @Override
@@ -28,23 +31,29 @@ public class LumenRecord extends Activity {
         textMax = (TextView)findViewById(R.id.max);
         textReading = (TextView)findViewById(R.id.reading);
 
-
-        GetSaveButtonAndBindClickEvent();
-
         SensorManager sensorManager
                 = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         Sensor lightSensor
                 = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         if (lightSensor == null){
+            lightRatingBar.setStepSize(1);
             Toast.makeText(LumenRecord.this,
                     "No light sensor.  Rate manually.",
                     Toast.LENGTH_LONG).show();
         }else{
+            lightRatingBar.setFocusable(false);
+            lightRatingBar.setOnTouchListener(new OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
             sensorManager.registerListener(lightSensorEventListener,
                     lightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
 
         }
+
+        GetSaveButtonAndBindClickEvent();
     }
 
     @Override
@@ -65,21 +74,17 @@ public class LumenRecord extends Activity {
         public void onSensorChanged(SensorEvent event) {
             // TODO Auto-generated method stub
             if(event.sensor.getType()==Sensor.TYPE_LIGHT){
-                float currentReading = event.values[0];
-                if (currentReading > max){
-                    max =  event.values[0];
+                    currentReading = event.values[0];
                     //Rating conversion
-                    if (max == 0.0) rating = 0;
-                    if (max > 0.0) rating = 1;
-                    if(max>50) rating = 2;
-                    if(max>100) rating = 3;
-                    if(max>1000) rating = 5;
-                    if(max>10000) rating = 4;
-                    RatingBar lightRatingBar = (RatingBar) findViewById(R.id.rtbLightRating);
+                    if (currentReading == 0.0) rating = 0;
+                    if (currentReading > 0.0) rating = 1;
+                    if(currentReading>=50) rating = 2;
+                    if(currentReading>=100) rating = 3;
+                    if(currentReading>=1000) rating = 5;
+                    if(currentReading>=10000) rating = 4;
                     lightRatingBar.setRating(rating);
                     }
                     textReading.setText("   Current Reading: " + String.valueOf(currentReading));
-            }
         }
 
     };
