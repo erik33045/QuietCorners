@@ -7,9 +7,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Button;
+import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 
@@ -17,10 +17,10 @@ import java.io.ByteArrayOutputStream;
 public class PicRecord extends Activity {
 
     private ImageView image;
-    public int picWidth;
-    public int picHeight;
+    public Bitmap bmp;
     String encodedImageString;
-    Button addPictureButton;
+    //Button confirmPictureButton;
+    //Button takePictureButton;
 
 
     private void dispatchTakePictureIntent(int actionCode) {
@@ -32,8 +32,8 @@ public class PicRecord extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picrecord);
-        dispatchTakePictureIntent(1);
-        addPictureButtonEvent();
+        takePictureButtonEvent();
+        confirmPictureButtonEvent();
 
     }
 
@@ -44,15 +44,19 @@ public class PicRecord extends Activity {
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
 
-            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            bmp = (Bitmap) data.getExtras().get("data");
 
-            image.setImageBitmap(bmp);
-            addPictureButton.requestFocus();
+            /*image.setImageBitmap(bmp);
+            confirmPictureButton.requestFocus();
 
-            byte[] byteArray = GetByteArrayFromBitmap(bmp);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] outputChunk = baos.toByteArray();
+            encodedImageString = Base64.encodeToString(outputChunk, Base64.DEFAULT);
 
-            Bitmap bmimage = BitmapFactory.decodeByteArray(byteArray, 0,
-                    byteArray.length);
+            byte[] bytarray = Base64.decode(encodedImageString, Base64.DEFAULT);
+            Bitmap bmimage = BitmapFactory.decodeByteArray(bytarray, 0,
+                    bytarray.length);*/
 
         }
 
@@ -66,10 +70,10 @@ public class PicRecord extends Activity {
         return Base64.decode(encodedImageString, Base64.DEFAULT);
     }
 
-    private void addPictureButtonEvent(){
-            Button button = (Button) findViewById(R.id.addPictureButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+    private void confirmPictureButtonEvent(){
+            Button button = (Button) findViewById(R.id.confirmPictureButton);
+            button.setOnClickListener(new View.OnClickListener(){
+               @Override
                        public void onClick(View view){
                             Intent in = new Intent(
                             Intent.ACTION_PICK,
@@ -81,8 +85,19 @@ public class PicRecord extends Activity {
                             in.putExtra("return-data", true);
 
                             startActivityForResult(in, 1);
+                            GetByteArrayFromBitmap(bmp);
                         }
 
+                });
+            }
+
+    private void takePictureButtonEvent(){
+        Button button = (Button) findViewById(R.id.takePictureButton);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                dispatchTakePictureIntent(1);
+            }
         });
     }
 }

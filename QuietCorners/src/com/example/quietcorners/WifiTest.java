@@ -35,9 +35,12 @@ public class WifiTest extends Activity {
 
         if (wifiTester.isWifiEnabled()) {
             Toast.makeText(WifiTest.this, "Wifi-enabled", Toast.LENGTH_LONG).show();
-            Log.d("WifiTest", "WifiTest.isWifiEnabled() — true ");
             wifiTester.startScan();
             testWifiButton.setEnabled(true);
+
+            /* Update the display twice to avoid the initial value, 0, of Max_Amplitude() */
+            UpdateDisplay();
+            UpdateDisplay();
         }
     }
 
@@ -104,14 +107,18 @@ public class WifiTest extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int signalStrength = getSignalStrength();
-                if (signalStrength != -1) {
-                    wifiText.setText("   Signal: " + String.valueOf(signalStrength) + " bars");
-                }
-                else {
-                    wifiText.setText("   Signal: None");
-                }
+                UpdateDisplay();
             }
         });
+    }
+
+    private void UpdateDisplay() {
+        int signalStrength = getSignalStrength();
+        if (signalStrength != -1) {
+            wifiText.setText("   Signal: " + String.valueOf(signalStrength) + " bars");
+        }
+        else {
+            wifiText.setText("   Signal: None");
+        }
     }
 }
