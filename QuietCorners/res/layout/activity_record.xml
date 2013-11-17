@@ -74,4 +74,12 @@
         android:layout_toRightOf="@+id/confirmButton"
         android:singleLine="false" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/testButton"
+        android:layout_alignTop="@+id/confirmButton"
+        android:layout_alignRight="@+id/textView2" />
+
 </RelativeLayout>

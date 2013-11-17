@@ -1,17 +1,20 @@
 package com.example.quietcorners;
 
 import android.graphics.Bitmap;
+import android.util.Base64;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -351,16 +354,21 @@ public class Corner {
         return new JSONArray(entityString);
     }
 
-    public int SendImageThroughPOST(final byte[] image, final int cornerId) {
+    public int SendImageThroughPOST(final byte[] byteArray, final int cornerId) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    ByteArrayEntity entity = new ByteArrayEntity(image);
+                    String stringEncodedByteArray = Base64.encodeToString(byteArray, 0);
+
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("image", stringEncodedByteArray));
+
                     DefaultHttpClient httpClient = new DefaultHttpClient();
                     String queryString = CreateSaveCornerImageQueryString(cornerId);
                     HttpPost post = new HttpPost("http://www.erik33045.webuda.com/default.php" + queryString);
-                    post.setEntity(entity);
+
+                    post.setEntity(new ByteArrayEntity(byteArray));
                     try {
                         httpClient.execute(post);
                     } catch (UnsupportedEncodingException e) {

@@ -28,6 +28,7 @@ public class Record extends Activity {
         GetPictureButtonAndBindClickEvent();
         GetOpenNetworksButtonAndBindClickEvent();
         GetConfirmButtonAndBindClickEvent();
+        GetTestButtonAndBindClickEvent();
     }
 
     //Start a location listener
@@ -114,55 +115,27 @@ public class Record extends Activity {
         });
     }
 
-    /*private void GetPictureButtonAndBindClickEvent() {
-        Button button = (Button) findViewById(R.id.pictureButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent i = new Intent(Record.this, PicRecord.class);
-                //startActivity(i);
-
-                //This is my button click to test the insert in the database. Clean this up later.
-                TestDatabaseSave();
-                TestDatabaseLoad();
-            }
-
-            private void TestDatabaseLoad() {
-                Comment comment = Corner.LoadComment(14);
-                Corner corner = Corner.LoadCorner(10);
-                ArrayList<Comment> comments = Corner.LoadCommentsByCornerId(12);
-                ArrayList<Corner> corners = Corner.LoadCornersWithinRange(new LatLng(0, 0), 200);
-                corners = Corner.LoadAllCorners();
-            }
-
-            private void TestDatabaseSave() {
-                Comment comment = new Comment();
-                comment.CornerId = 12;
-                comment.Comment = "This is a comment created from Android.";
-                Corner.SaveComment(comment);
-                Corner corner = new Corner();
-                corner.Lat = 27.456478894;
-                corner.Lng = 87.464834684;
-                corner.LightRating = 5;
-                corner.QuietRating = 5;
-                corner.HasOpenNetwork = false;
-                corner.OverallRating = 5;
-                Corner.SaveCorner(corner);
-            }
-        });
-    }*/
-
     private void GetConfirmButtonAndBindClickEvent() {
         Button button = (Button) findViewById(R.id.confirmButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(Record.this, Confirm.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void GetTestButtonAndBindClickEvent() {
+        Button button = (Button) findViewById(R.id.testButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
                 new Corner().SendImageThroughPOST(new PicRecord().GetByteArrayFromBitmap(image), 38);
-
-                //Intent i = new Intent(Record.this, Confirm.class);
-                //startActivity(i);
             }
+
+            ;
         });
     }
 }
