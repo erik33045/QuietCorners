@@ -25,4 +25,13 @@
         android:layout_alignRight="@+id/textView"
         android:layout_marginRight="35dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Take_Picture"
+        android:id="@+id/addPictureButton"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginTop="13dp" />
+
 </RelativeLayout>

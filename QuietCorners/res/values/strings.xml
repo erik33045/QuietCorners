@@ -35,5 +35,5 @@
     <string name="hasOpenWifi">Has Open Wifi</string>
     <string name="addComment">Add Comment</string>
     <string name="pictureDescription">A picture of the corner</string>
-    <string name="cornerImage">cornerImage</string>
+    <string name="Take_Picture">Take a Picture of the Corner</string>
 </resources>
