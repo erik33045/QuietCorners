@@ -23,8 +23,7 @@ public class SoundRecord extends Activity {
         setContentView(R.layout.activity_soundrecord);
         decibels = (TextView)findViewById(R.id.rec_dB);
 
-        if (decibels == null) Toast.makeText(SoundRecord.this, "its null", Toast.LENGTH_LONG).show();
-        else decibels.setText("   Recording: 0.00 dB");
+        decibels.setText("   Recording: 0.00 dB");
 
         startRecord(); //Go ahead and start the recorder on creation.
         GetSaveButtonAndBindClickEvent();
@@ -57,6 +56,7 @@ public class SoundRecord extends Activity {
                 Toast.makeText(SoundRecord.this, "prepare() failed", Toast.LENGTH_LONG).show();
             }
             decRecorder.start();
+            updateDisplay();
         }
     }
 
