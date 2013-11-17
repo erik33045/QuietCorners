@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.view.View;
+import android.app.Application;
 
 import java.io.ByteArrayOutputStream;
 
