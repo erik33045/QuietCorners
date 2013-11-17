@@ -7,9 +7,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.widget.ImageView;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -49,25 +49,27 @@ public class PicRecord extends Activity {
             image.setImageBitmap(bmp);
             addPictureButton.requestFocus();
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] outputChunk = baos.toByteArray();
-            encodedImageString = Base64.encodeToString(outputChunk, Base64.DEFAULT);
+            byte[] byteArray = GetByteArrayFromBitmap(bmp);
 
-            byte[] bytarray = Base64.decode(encodedImageString, Base64.DEFAULT);
-            Bitmap bmimage = BitmapFactory.decodeByteArray(bytarray, 0,
-                    bytarray.length);
+            Bitmap bmimage = BitmapFactory.decodeByteArray(byteArray, 0,
+                    byteArray.length);
 
         }
 
     }
 
-
+    private byte[] GetByteArrayFromBitmap(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] outputChunk = baos.toByteArray();
+        encodedImageString = Base64.encodeToString(outputChunk, Base64.DEFAULT);
+        return Base64.decode(encodedImageString, Base64.DEFAULT);
+    }
 
     private void addPictureButtonEvent(){
             Button button = (Button) findViewById(R.id.addPictureButton);
-            button.setOnClickListener(new View.OnClickListener()){
-               @Override
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
                        public void onClick(View view){
                             Intent in = new Intent(
                             Intent.ACTION_PICK,
@@ -81,8 +83,7 @@ public class PicRecord extends Activity {
                             startActivityForResult(in, 1);
                         }
 
-                }
-            };
-
+        });
+    }
 }
 
