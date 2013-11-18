@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ public class Confirm extends Activity {
     RatingBar quietRatingBar;
     RatingBar lightRatingBar;
     TextView hasOpenNetwork;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,9 @@ public class Confirm extends Activity {
         hasOpenNetwork = (TextView)findViewById(R.id.txtHasOpenNetwork);
         if(application.openNetwork) hasOpenNetwork.setText("YES");
         else hasOpenNetwork.setText("NO");
+
+        image = (ImageView) findViewById(R.id.picture);
+        image.setImageBitmap(application.cornerBitmap);
     }
 
     @Override
