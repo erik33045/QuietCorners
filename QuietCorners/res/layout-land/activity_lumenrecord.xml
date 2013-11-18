@@ -50,4 +50,15 @@
         android:id="@+id/save_button"
         android:layout_below="@+id/max"
         android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        style="@style/foodRatingBar"
+        android:id="@+id/rtbLightRating"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:isIndicator="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

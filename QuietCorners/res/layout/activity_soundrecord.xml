@@ -44,4 +44,15 @@
         android:layout_below="@+id/rec_dB"
         android:layout_centerHorizontal="true" />
 
+    <RatingBar
+        style="@style/foodRatingBar"
+        android:id="@+id/rating_Sound"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:isIndicator="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>

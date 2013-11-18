@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,15 +16,18 @@ import java.text.DecimalFormat;
 
 public class SoundRecord extends Activity {
     TextView decibels;
+    RatingBar soundRatingBar;
     MediaRecorder decRecorder = null;
     private double ema = 0.0;
     private double soundLevel = 0;
+    private int soundRating = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soundrecord);
         decibels = (TextView)findViewById(R.id.rec_dB);
+        soundRatingBar = (RatingBar)findViewById(R.id.rating_Sound);
 
         decibels.setText("   Recording: 0.00 dB");
 
@@ -58,6 +63,12 @@ public class SoundRecord extends Activity {
                 Toast.makeText(SoundRecord.this, "prepare() failed", Toast.LENGTH_LONG).show();
             }
             decRecorder.start();
+            soundRatingBar.setFocusable(false);
+            soundRatingBar.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
             updateDisplay();
         }
     }
@@ -71,21 +82,24 @@ public class SoundRecord extends Activity {
     }
 
     private void GetSaveButtonAndBindClickEvent() {
-        Button button = (Button) findViewById(R.id.get_sound);
+        Button button = (Button) findViewById(R.id.sav_Sound);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveRating();
+                Intent i = new Intent(SoundRecord.this, Record.class);
+                startActivity(i);
             }
         });
     }
 
     private void GetRecordButtonAndBindClickEvent() {
-        Button button = (Button) findViewById(R.id.sav_Sound);
+        Button button = (Button) findViewById(R.id.get_sound);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 soundLevel = getAmplitude();
+                calculateRating();
                 updateDisplay();
             }
         });
@@ -105,7 +119,7 @@ public class SoundRecord extends Activity {
     }
 
     public void updateDisplay() {
-        double value = getAmplitude();
+        double value = soundLevel;
         DecimalFormat df = new DecimalFormat("#.##");
         decibels.setText("   Recording: " + String.valueOf(df.format(value)) + " dB");
     }
@@ -116,12 +130,14 @@ public class SoundRecord extends Activity {
     }
 
     private int calculateRating() {
-        int rating = 0;
-        if (soundLevel < 1500) rating = 5;
-        if (soundLevel < 3500) rating = 4;
-        if (soundLevel < 6000) rating = 3;
-        if (soundLevel < 90000) rating = 2;
-        if (soundLevel < 150000) rating = 1;
+        int rating = 5;
+        if (soundLevel >= 1500) rating = 4;
+        if (soundLevel >= 3500) rating = 3;
+        if (soundLevel >= 6000) rating = 2;
+        if (soundLevel >= 9000) rating = 1;
+        if (soundLevel >= 15000) rating = 0;
+        soundRatingBar.setRating(rating);
+        soundRating = rating;
         return rating;
     }
 }
