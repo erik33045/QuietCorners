@@ -141,7 +141,7 @@ public class Corner {
             Corner corner = new Corner(array.getJSONObject(0));
 
             //Load the comments if it has one
-            corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
+            // corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
 
             //Load Corner Picture if it has one
             corner.Image = Corner.GetCornerImageById(corner.Id);
@@ -193,11 +193,13 @@ public class Corner {
     public static Bitmap GetCornerImageById(int cornerId) {
         String queryString = GetCornerImageQueryString(cornerId);
         try {
-            return Corner.ReturnImageFromHTTPGet(Corner.PerformHTTPGetAndReturnEntity(queryString));
+            byte[] array = Corner.AccessURLReturnImage(queryString);
+            Bitmap bitmap = new PicRecord().GetBitMapFromByteArray(array);
+            return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private static String GetCornerImageQueryString(int cornerId) {
@@ -348,6 +350,31 @@ public class Corner {
         return array[0];
     }
 
+    private static byte[] AccessURLReturnImage(final String queryString) throws UnsupportedEncodingException {
+        final boolean[] canProceed = {false};
+        final byte[][] byteArray = {null};
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpEntity entity = PerformHTTPGetAndReturnEntity(queryString);
+                    byteArray[0] = ReturnImageFromHTTPGet(entity);
+                    canProceed[0] = true;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+        //OK, this is probably the worst line of code in this project. Freeze current thread will opened thread loads the object from the DB. Not elegant, not smart but it works.
+        //noinspection StatementWithEmptyBody
+        while (!canProceed[0])
+            ;
+        return byteArray[0];
+    }
+
     private static JSONArray PerformHTTPGetAndReturnJSONArray(String queryString) throws IOException, JSONException {
         HttpEntity entity = PerformHTTPGetAndReturnEntity(queryString);
         return getJsonArrayFromHTTPEntity(entity);
@@ -368,9 +395,9 @@ public class Corner {
         return response.getEntity();
     }
 
-    private static Bitmap ReturnImageFromHTTPGet(HttpEntity entity) {
+    private static byte[] ReturnImageFromHTTPGet(HttpEntity entity) {
         try {
-            return new PicRecord().GetBitMapFromByteArray(EntityUtils.toByteArray(entity));
+            return EntityUtils.toByteArray(entity);
         } catch (IOException e) {
             e.printStackTrace();
         }
