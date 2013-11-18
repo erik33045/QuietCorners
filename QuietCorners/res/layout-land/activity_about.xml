@@ -87,13 +87,13 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
                         android:id="@+id/imageView"
                         android:contentDescription="@string/team_image"
                         android:minHeight="120dp"
                         android:minWidth="250dp"
-                        android:src="@drawable/ic_launcher"
+                        android:src="@drawable/group_Photo"
                         android:maxHeight="150dp"
                         android:maxWidth="250dp" />
                 </FrameLayout>
