@@ -253,7 +253,7 @@ public class Corner {
 
     private static int GetCornerIdFromJSONArray(JSONArray array) {
         try {
-            return array.getJSONObject(0).getInt("CornerId");
+            return array.getJSONObject(0).getInt("Id");
         } catch (JSONException e) {
             e.printStackTrace();
             return -1;
@@ -325,7 +325,6 @@ public class Corner {
             @Override
             public void run() {
                 try {
-                    try {
                         JSONArray returnArray = PerformHTTPGetAndReturnJSONArray(queryString);
                         if (returnArray.length() < 1) {
                             array[0] = new JSONArray("[]");
@@ -334,13 +333,6 @@ public class Corner {
                             array[0] = returnArray;
                             canProceed[0] = true;
                         }
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    } catch (ClientProtocolException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -362,6 +354,7 @@ public class Corner {
 
     private static JSONArray getJsonArrayFromHTTPEntity(HttpEntity entity) throws IOException, JSONException {
         String entityString = EntityUtils.toString(entity);
+        entityString = entityString.substring(entityString.indexOf('['));
         return new JSONArray(entityString);
     }
 
