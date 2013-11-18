@@ -95,7 +95,6 @@
                         android:contentDescription="@string/team_image"
                         android:minHeight="150dp"
                         android:minWidth="250dp"
-                        android:src="@drawable/group_Photo"
                         android:maxWidth="250dp"
                         android:maxHeight="150dp" />
                 </FrameLayout>
