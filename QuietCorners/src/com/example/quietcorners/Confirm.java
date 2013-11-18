@@ -49,12 +49,13 @@ public class Confirm extends Activity {
 
         //Over Rating Bar
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
-        RatingBar.OnRatingBarChangeListener barListener =
+        RatingBar.OnRatingBarChangeListener activateCompleteButton =
                 new RatingBar.OnRatingBarChangeListener() {
                     public void onRatingChanged(RatingBar overallRatingBar, float rating, boolean fromTouch) {
                         completeButton.setEnabled(true);
                         }
                 };
+        overallRatingBar.setOnRatingBarChangeListener(activateCompleteButton);
         overallRatingBar.setStepSize(1);
 
         //Wireless
