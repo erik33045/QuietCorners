@@ -22,14 +22,14 @@
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignRight="@+id/textView2"
             android:gravity="center"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="4dp">
 
             <Button
                 android:layout_width="wrap_content"
