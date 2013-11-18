@@ -83,6 +83,8 @@ public class Confirm extends Activity {
                 corner.Lat = application.latitude;
                 corner.Lng = application.longitude;
 
+                Corner.SaveCorner(corner);
+
                 android.content.Intent i = new android.content.Intent(Confirm.this, Main.class);
                 startActivity(i);
             }
