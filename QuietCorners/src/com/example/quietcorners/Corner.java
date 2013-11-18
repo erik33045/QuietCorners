@@ -16,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.app.Application;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -184,9 +183,6 @@ public class Corner {
             String query = CreateGetCornerIdByPositionQueryString(position);
             JSONArray array = AccessURLReturnJSON(query);
 
-            Variables application = (Variables)getApplication();
-            application.cornerID = Corner.GetCornerIdFromJSONArray(array);
-
             return Corner.GetCornerIdFromJSONArray(array);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -330,14 +326,14 @@ public class Corner {
             @Override
             public void run() {
                 try {
-                        JSONArray returnArray = PerformHTTPGetAndReturnJSONArray(queryString);
-                        if (returnArray.length() < 1) {
-                            array[0] = new JSONArray("[]");
-                            canProceed[0] = true;
-                        } else {
-                            array[0] = returnArray;
-                            canProceed[0] = true;
-                        }
+                    JSONArray returnArray = PerformHTTPGetAndReturnJSONArray(queryString);
+                    if (returnArray.length() < 1) {
+                        array[0] = new JSONArray("[]");
+                        canProceed[0] = true;
+                    } else {
+                        array[0] = returnArray;
+                        canProceed[0] = true;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
