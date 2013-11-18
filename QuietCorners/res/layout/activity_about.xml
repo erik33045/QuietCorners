@@ -94,6 +94,7 @@
                         android:id="@+id/imageView"
                         android:contentDescription="@string/team_image"
                         android:minHeight="150dp"
+                        android:src="@drawable/ic_launcher"
                         android:minWidth="250dp"
                         android:maxWidth="250dp"
                         android:maxHeight="150dp" />
