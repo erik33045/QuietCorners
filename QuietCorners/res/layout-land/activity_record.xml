@@ -67,10 +67,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take Picture"
+        android:text="@string/record_picture"
         android:id="@+id/pictureButton"
         android:layout_alignTop="@+id/openNetworksButton"
         android:layout_toRightOf="@+id/confirmButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/testButton"
+        android:layout_above="@+id/confirmButton"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

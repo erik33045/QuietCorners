@@ -6,23 +6,178 @@
     tools:context=".Confirm"
     android:clickable="false">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Brightness"
+                android:id="@+id/textView"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/text" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAlignment="gravity"
+                android:gravity="right"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <RatingBar
+                    android:id="@+id/rtbLightRating"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:isIndicator="false"
+                    style="@style/foodRatingBar"
+                    android:layout_marginTop="10dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/noiselessness"
+                android:id="@+id/textView2"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/text" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAlignment="gravity"
+                android:gravity="right"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp">
+
+                <RatingBar
+                    style="@style/foodRatingBar"
+                    android:id="@+id/rtbQuietRating"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:isIndicator="false" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/hasOpenWifi"
+                android:id="@+id/textView4"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/text" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAlignment="gravity"
+                android:gravity="right"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/txtHasOpenNetwork"
+                    android:textColor="@color/text" />
+            </RelativeLayout>
+
+       </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/picture"
+            android:minHeight="200dp"
+            android:minWidth="400dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/black_overlay"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/pictureDescription" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Page Placeholder"
-        android:textColor="@color/background_text"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/text_heading_height"
-        android:layout_centerVertical="true"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAlignment="gravity"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp">
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete Corner"
+        android:id="@+id/completeButton"
+        android:layout_marginTop="110dp"
+        android:layout_below="@+id/linearLayout4"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/lightReading"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/background_text"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rate Overall"
+        android:id="@+id/textView3"
+        android:textColor="@color/text"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_toLeftOf="@+id/completeButton"
+        android:layout_marginTop="40dp" />
+
+    <RatingBar
+        style="@style/foodRatingBar"
+        android:id="@+id/rtbOverallRating"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:isIndicator="false"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
 
 </RelativeLayout>
+
