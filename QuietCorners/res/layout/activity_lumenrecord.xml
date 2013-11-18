@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/record_bg_port"
-    tools:context=".LumenRecord"
-    android:clickable="false"
-    style="@style/foodRatingBar">
+    tools:context=".LumenRecord">
 
     <TextView
         android:layout_width="wrap_content"
