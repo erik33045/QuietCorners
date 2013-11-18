@@ -93,11 +93,11 @@ public class Corner {
             String saveCornerQuery = TurnCornerIntoQueryStringForSave(corner);
             if (AccessURLNoReturnData(saveCornerQuery) == 0) {
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(400);
 
                     if (corner.Image != null && new PicRecord().GetByteArrayFromBitmap(corner.Image).length > 0) {
                         int cornerId = GetCornerIdByPosition(new LatLng(corner.Lat, corner.Lng));
-                        Thread.sleep(200);
+                        Thread.sleep(400);
                         return SaveCornerImage(corner.Image, cornerId);
                     }
                 } catch (InterruptedException e) {
