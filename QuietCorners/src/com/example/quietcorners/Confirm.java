@@ -16,7 +16,7 @@ public class Confirm extends Activity {
     RatingBar lightRatingBar;
     TextView hasOpenNetwork;
     private ImageView image;
-    Button completeButton
+    Button completeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,11 @@ public class Confirm extends Activity {
 
         //Over Rating Bar
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
-        lightRatingBar.setOnTouchListener(new View.OnTouchListener() {
+        overallRatingBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
                 completeButton.setEnabled(true);
+                return true;
             }
         });
         overallRatingBar.setStepSize(1);
@@ -102,12 +104,6 @@ public class Confirm extends Activity {
                 application.overallRating = -1;
 
                 Toast.makeText(Confirm.this,"Corner Saved!",Toast.LENGTH_LONG).show();
-
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
                 android.content.Intent i = new android.content.Intent(Confirm.this, Main.class);
                 startActivity(i);
