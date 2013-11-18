@@ -50,8 +50,8 @@ public class Confirm extends Activity {
         //Over Rating Bar
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
         overallRatingBar.setStepSize(1);
-        while(overallRatingBar.getRating() == -1);
-        completeButton.setEnabled(true);
+        if(overallRatingBar.getRating() == -1);
+        else completeButton.setEnabled(true);
 
         //Wireless
         hasOpenNetwork = (TextView)findViewById(R.id.txtHasOpenNetwork);
