@@ -55,6 +55,9 @@ public class Record extends Activity {
         LatLng coordinate = LocationMethods.GetCoordinate(loc);
         TextView currentLocation = (TextView) findViewById(R.id.txtCurrentLocation);
         currentLocation.setText(getResources().getString(R.string.current_location) + " Lat: " + coordinate.latitude + " Lon: " + coordinate.longitude);
+        Variables application = (Variables)getApplication();
+        application.longitude = coordinate.longitude;
+        application.latitude = coordinate.latitude;
     }
 
     //pauses listener while app is inactive
