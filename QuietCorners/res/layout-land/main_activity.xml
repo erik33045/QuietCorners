@@ -2,67 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cccccc"
+    android:background="@drawable/main_bg_land"
     tools:context=".Main">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
             is needed to present your content, e.g. VideoView, SurfaceView,
             TextureView, etc. -->
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:keepScreenOn="true"
-        android:textColor="@color/background_text"
-        android:textStyle="bold"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:background="@drawable/main_bg_land" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:layout_gravity="bottom">
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?buttonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="116dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/background_menu"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Record"
+            android:id="@+id/record_button"
+            android:layout_gravity="bottom"
+            android:enabled="true"
+            android:gravity="center" />
 
-            <Button
-                android:id="@+id/record_button"
-                style="?buttonBarButtonStyle"
-                android:background="@color/black_overlay"
-                android:layout_height="0dp"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/record_button" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore"
+            android:id="@+id/explore_button"
+            android:layout_gravity="bottom"
+            android:enabled="true"
+            android:gravity="center" />
 
-            <Button
-                android:id="@+id/explore_button"
-                android:background="@color/black_overlay"
-                style="?buttonBarButtonStyle"
-                android:layout_height="0dp"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/explore_button" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:id="@+id/about_button"
+            android:layout_gravity="bottom"
+            android:enabled="true"
+            android:gravity="center" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/about_button"
-                android:background="@color/black_overlay"
-                style="?buttonBarButtonStyle"
-                android:layout_height="0dp"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/about_button" />
-        </LinearLayout>
-    </FrameLayout>
 </FrameLayout>

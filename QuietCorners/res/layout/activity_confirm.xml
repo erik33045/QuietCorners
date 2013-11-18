@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/generic_bg_port"
-    tools:context=".Confirm"
-    android:clickable="false">
+    tools:context=".Confirm">
 
     <LinearLayout
         android:orientation="vertical"

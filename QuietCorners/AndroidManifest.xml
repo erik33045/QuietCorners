@@ -41,7 +41,6 @@
         <!-- Main Activity -->
         <activity
             android:name=".Main"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

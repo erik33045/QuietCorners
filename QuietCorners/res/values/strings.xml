@@ -11,7 +11,7 @@
     <string name="current_location">Current Location:</string>
     <string name="record_sound">Record Sound</string>
     <string name="record_light">Record Light</string>
-    <string name="open_networks">Open Networks</string>
+    <string name="open_networks">Check WiFi</string>
     <string name="confirm">Confirm</string>
     <string name="record_picture">Take Picture</string>
     <string name="error_getting_maps">Google Play Services were not found or were unavailable</string>
