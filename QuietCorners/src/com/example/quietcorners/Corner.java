@@ -1,20 +1,17 @@
 package com.example.quietcorners;
 
 import android.graphics.Bitmap;
-import android.util.Base64;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +47,7 @@ enum Intent {
     LoadComment,
     LoadCommentsByCornerId,
     LoadCorner,
+    LoadCornerImage,
     LoadCornersWithinRange,
     LoadAllCorners,
     LoadCornerIdByPosition
@@ -91,16 +89,6 @@ public class Corner {
 
     public static int SaveCorner(Corner corner) {
         try {
-            String query = TurnCornerIntoQueryStringForSave(corner);
-            return AccessURLNoReturnData(query);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public static int SaveCornerWithImage(Corner corner) {
-        try {
             String saveCornerQuery = TurnCornerIntoQueryStringForSave(corner);
             if (AccessURLNoReturnData(saveCornerQuery) == 0) {
                 try {
@@ -108,9 +96,10 @@ public class Corner {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                int cornerId = GetCornerIdByPosition(new LatLng(corner.Lat, corner.Lng));
-                return SaveCornerImage(corner.Image, cornerId);
+                if (corner.Image != null && new PicRecord().GetByteArrayFromBitmap(corner.Image).length > 0) {
+                    int cornerId = GetCornerIdByPosition(new LatLng(corner.Lat, corner.Lng));
+                    return SaveCornerImage(corner.Image, cornerId);
+                }
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -147,7 +136,17 @@ public class Corner {
         try {
             String query = CreateGetCornerByIdQueryString(id);
             JSONArray array = AccessURLReturnJSON(query);
-            return new Corner(array.getJSONObject(0));
+
+            //Load the corner
+            Corner corner = new Corner(array.getJSONObject(0));
+
+            //Load the comments if it has one
+            corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
+
+            //Load Corner Picture if it has one
+            corner.Image = Corner.GetCornerImageById(corner.Id);
+
+            return corner;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -190,8 +189,21 @@ public class Corner {
         }
     }
 
-    public static int SaveCornerImage(Bitmap image, int cornerId) {
-        String query = CreateSaveCornerImageQueryString(cornerId);
+    public static Bitmap GetCornerImageById(int cornerId) {
+        String queryString = GetCornerImageQueryString(cornerId);
+        try {
+            return Corner.ReturnImageFromHTTPGet(Corner.PerformHTTPGetAndReturnEntity(queryString));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static String GetCornerImageQueryString(int cornerId) {
+        return "?Intent=" + Intent.LoadCornerImage + "&CornerId=" + cornerId;
+    }
+
+    private static int SaveCornerImage(Bitmap image, int cornerId) {
         return new Corner().SendImageThroughPOST(new PicRecord().GetByteArrayFromBitmap(image), cornerId);
     }
 
@@ -306,7 +318,6 @@ public class Corner {
         return 0;
     }
 
-
     private static JSONArray AccessURLReturnJSON(final String queryString) throws UnsupportedEncodingException {
         final JSONArray[] array = {new JSONArray()};
         final boolean[] canProceed = {false};
@@ -343,27 +354,40 @@ public class Corner {
             ;
         return array[0];
     }
+
     private static JSONArray PerformHTTPGetAndReturnJSONArray(String queryString) throws IOException, JSONException {
+        HttpEntity entity = PerformHTTPGetAndReturnEntity(queryString);
+        return getJsonArrayFromHTTPEntity(entity);
+    }
+
+    private static JSONArray getJsonArrayFromHTTPEntity(HttpEntity entity) throws IOException, JSONException {
+        String entityString = EntityUtils.toString(entity);
+        return new JSONArray(entityString);
+    }
+
+    private static HttpEntity PerformHTTPGetAndReturnEntity(String queryString) throws IOException {
         DefaultHttpClient httpClient;
         httpClient = new DefaultHttpClient();
         HttpUriRequest request = new HttpGet("http://www.erik33045.webuda.com/default.php" + queryString);
         HttpResponse response;
         response = httpClient.execute(request);
-        HttpEntity entity = response.getEntity();
-        String entityString = EntityUtils.toString(entity);
-        return new JSONArray(entityString);
+        return response.getEntity();
     }
 
-    public int SendImageThroughPOST(final byte[] byteArray, final int cornerId) {
+    private static Bitmap ReturnImageFromHTTPGet(HttpEntity entity) {
+        try {
+            return new PicRecord().GetBitMapFromByteArray(EntityUtils.toByteArray(entity));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private int SendImageThroughPOST(final byte[] byteArray, final int cornerId) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String stringEncodedByteArray = Base64.encodeToString(byteArray, 0);
-
-                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                    nameValuePairs.add(new BasicNameValuePair("image", stringEncodedByteArray));
-
                     DefaultHttpClient httpClient = new DefaultHttpClient();
                     String queryString = CreateSaveCornerImageQueryString(cornerId);
                     HttpPost post = new HttpPost("http://www.erik33045.webuda.com/default.php" + queryString);

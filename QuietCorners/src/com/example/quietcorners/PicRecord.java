@@ -7,9 +7,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.widget.ImageView;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
 import java.io.ByteArrayOutputStream;
 
 
@@ -43,14 +44,17 @@ public class PicRecord extends Activity {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
 
             bmp = (Bitmap) data.getExtras().get("data");
-            bmp = BitmapFactory.decodeByteArray(GetByteArrayFromBitmap(bmp), 0,
-                    GetByteArrayFromBitmap(bmp).length);
+            bmp = GetBitMapFromByteArray(GetByteArrayFromBitmap(bmp));
             image = (ImageView) findViewById(R.id.cornerPicture);
             image.setImageBitmap(bmp);
 
         }
-
     }
+
+    public Bitmap GetBitMapFromByteArray(byte[] byteArray) {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    }
+
 
     public byte[] GetByteArrayFromBitmap(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

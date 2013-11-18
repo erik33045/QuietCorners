@@ -1,10 +1,12 @@
 package com.example.quietcorners;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -26,10 +28,11 @@ public class LocationDetails extends FragmentActivity implements AddCommentDialo
         setContentView(R.layout.activity_locationdetails);
 
         GetAddCommentsButtonAndBindClickEvent();
-        Corner corner = LoadCornerWithComments(GetCornerIdFromBundle());
+        Corner corner = Corner.LoadCorner(GetCornerIdFromBundle());
         SetScreenValuesFromCorner(corner);
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void showDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new AddCommentDialog();
@@ -92,13 +95,6 @@ public class LocationDetails extends FragmentActivity implements AddCommentDialo
         arrayAdapter.notifyDataSetChanged();
     }
 
-
-    private Corner LoadCornerWithComments(int cornerId) {
-        Corner corner = Corner.LoadCorner(cornerId);
-        corner.Comments = Corner.LoadCommentsByCornerId(cornerId);
-        return corner;
-    }
-
     private void GetAddCommentsButtonAndBindClickEvent() {
         Button button = (Button) findViewById(R.id.addComment);
         button.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +123,7 @@ public class LocationDetails extends FragmentActivity implements AddCommentDialo
 
 }
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 class AddCommentDialog extends DialogFragment {
     public interface AddCommentDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog, String value);
