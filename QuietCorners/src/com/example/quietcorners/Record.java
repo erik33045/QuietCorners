@@ -134,8 +134,7 @@ public class Record extends Activity {
                 Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
                 new Corner().SendImageThroughPOST(new PicRecord().GetByteArrayFromBitmap(image), 38);
             }
-
-            ;
         });
+
     }
 }
