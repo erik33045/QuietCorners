@@ -51,18 +51,16 @@ public class PicRecord extends Activity {
         }
     }
 
-    public Bitmap GetBitMapFromByteArray(String encodedImage) {
-        byte[] byteArray = Base64.decode(encodedImage, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    public Bitmap GetBitMapFromByteArray(byte[] array) {
+        return BitmapFactory.decodeByteArray(array, 0, array.length);
     }
 
 
-    public String GetByteArrayFromBitmap(Bitmap bmp) {
+    public byte[] GetByteArrayFromBitmap(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] array = baos.toByteArray();
-        encodedImage = Base64.encodeToString(array, Base64.NO_WRAP);
-        return encodedImage;
+        return array;
     }
 
     private void confirmPictureButtonEvent(){
