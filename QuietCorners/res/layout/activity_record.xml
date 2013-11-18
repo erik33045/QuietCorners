@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ui_panel">
 
         <TextView
             android:layout_width="fill_parent"

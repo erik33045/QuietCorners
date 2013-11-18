@@ -8,13 +8,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.RatingBar;
-import android.view.View.OnTouchListener;
-import android.view.MotionEvent;
 
 public class LumenRecord extends Activity {
     TextView textMax, textReading;
