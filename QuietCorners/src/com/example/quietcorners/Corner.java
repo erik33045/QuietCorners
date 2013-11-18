@@ -182,6 +182,10 @@ public class Corner {
         try {
             String query = CreateGetCornerIdByPositionQueryString(position);
             JSONArray array = AccessURLReturnJSON(query);
+
+            Variables application = (Variables)getApplication();
+            application.cornerID = Corner.GetCornerIdFromJSONArray(array);
+
             return Corner.GetCornerIdFromJSONArray(array);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

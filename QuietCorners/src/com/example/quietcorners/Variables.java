@@ -8,8 +8,10 @@ public class Variables extends Application {
     public int lightRating = -1;
     public int internetRating = -1;
     public boolean openNetwork = false;
-    public Bitmap cornerBitmap;
-    double longitude;
-    double latitude;
-    int overallRating;
+    public Bitmap cornerBitmap = null;
+    public double longitude = 0;
+    public double latitude = 0;
+    public int overallRating = 0;
+    public int cornerID = 0;
+    public boolean descriptionFlag = false;
 }
