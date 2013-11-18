@@ -1,165 +1,216 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/generic_bg_port"
+    android:background="@drawable/bg_faded"
     tools:context=".Confirm">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout4">
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ui_info">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/picture"
+                    android:minHeight="200dp"
+                    android:minWidth="200dp"
+                    android:background="@color/black_overlay"
+                    android:contentDescription="@string/pictureDescription"
+                    android:layout_margin="4dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout4">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/ui_info"
+                    android:layout_margin="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/Brightness"
+                        android:id="@+id/textView"
+                        android:layout_marginLeft="10dp" />
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <RatingBar
+                            android:id="@+id/rtbLightRating"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:numStars="5"
+                            android:isIndicator="false"
+                            style="@style/foodRatingBar"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:mirrorForRtl="false"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="8dp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ui_info">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/noiselessness"
+                        android:id="@+id/textView2"
+                        android:layout_marginLeft="10dp" />
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/frameLayout">
+
+                        <RatingBar
+                            style="@style/foodRatingBar"
+                            android:id="@+id/rtbQuietRating"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:numStars="5"
+                            android:rating="0"
+                            android:isIndicator="false"
+                            android:layout_marginRight="8dp"
+                            android:layout_gravity="center|right" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/linearLayout3"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/ui_info">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/hasOpenWifi"
+                        android:id="@+id/textView4"
+                        android:layout_marginLeft="10dp" />
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/txtHasOpenNetwork"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:gravity="right" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/Brightness"
-                android:id="@+id/textView"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/text" />
-
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
+                android:background="@drawable/ui_panel_edge"
+                android:layout_marginTop="16dp"></FrameLayout>
 
-                <RatingBar
-                    android:id="@+id/rtbLightRating"
-                    android:layout_height="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ui_panel">
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:numStars="5"
-                    android:rating="0"
-                    android:isIndicator="false"
-                    style="@style/foodRatingBar"
-                    android:layout_marginTop="10dp" />
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Rate Overall"
+                        android:id="@+id/textView3"
+                        android:layout_below="@+id/linearLayout4"
+                        android:layout_toLeftOf="@+id/completeButton" />
+
+                    <RatingBar
+                        style="@style/foodRatingBar"
+                        android:id="@+id/rtbOverallRating"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:isIndicator="false"
+                        android:layout_alignBottom="@+id/textView3"
+                        android:layout_alignParentRight="true" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="16dp">
+
+                    <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Complete Corner"
+                        android:id="@+id/completeButton"
+                        android:layout_below="@+id/linearLayout4"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="right" />
+                </FrameLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/noiselessness"
-                android:id="@+id/textView2"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/text" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp">
-
-                <RatingBar
-                    style="@style/foodRatingBar"
-                    android:id="@+id/rtbQuietRating"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:numStars="5"
-                    android:rating="0"
-                    android:isIndicator="false" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/hasOpenWifi"
-                android:id="@+id/textView4"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/text" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/txtHasOpenNetwork"
-                    android:textColor="@color/text" />
-            </RelativeLayout>
-
-       </LinearLayout>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/picture"
-            android:minHeight="200dp"
-            android:minWidth="200dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/black_overlay"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@string/pictureDescription" />
     </LinearLayout>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Complete Corner"
-        android:id="@+id/completeButton"
-        android:layout_marginTop="110dp"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Rate Overall"
-        android:id="@+id/textView3"
-        android:textColor="@color/text"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_toLeftOf="@+id/completeButton"
-        android:layout_marginTop="40dp" />
-
-    <RatingBar
-        style="@style/foodRatingBar"
-        android:id="@+id/rtbOverallRating"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:numStars="5"
-        android:rating="0"
-        android:isIndicator="false"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp" />
-
-</RelativeLayout>
+</FrameLayout>
 
