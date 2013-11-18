@@ -77,7 +77,7 @@ public class LocationDetails extends FragmentActivity implements AddCommentDialo
 
         //Note, this will need to change when we store pictures. Will have to be to a bitmap or URL, depending on what we choose.
         ImageView picture = (ImageView) findViewById(R.id.picture);
-        picture.setImageResource(R.drawable.ic_launcher);
+        picture.setImageBitmap(corner.Image);
 
         ListView comments = (ListView) findViewById(R.id.lvComments);
         SetListViewDataSet(corner.Comments, comments);
