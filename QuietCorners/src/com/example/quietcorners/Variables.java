@@ -11,5 +11,5 @@ public class Variables extends Application {
     public Bitmap cornerBitmap = null;
     public double longitude = 0;
     public double latitude = 0;
-    public int overallRating = -1;
+    public int overallRating = 0;
 }

@@ -23,7 +23,6 @@ public class Confirm extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
         completeButton = (Button) findViewById(R.id.completeButton);
-        completeButton.setEnabled(false);
         GetCompleteButtonEvent();
         Variables application = (Variables)getApplication();
 
@@ -49,12 +48,6 @@ public class Confirm extends Activity {
 
         //Over Rating Bar
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
-        RatingBar.OnRatingBarChangeListener barListener =
-                new RatingBar.OnRatingBarChangeListener() {
-                    public void onRatingChanged(RatingBar overallRatingBar, float rating, boolean fromTouch) {
-                        completeButton.setEnabled(true);
-                        }
-                };
         overallRatingBar.setStepSize(1);
 
         //Wireless
@@ -100,7 +93,7 @@ public class Confirm extends Activity {
                 application.cornerBitmap = null;
                 application.longitude = 0;
                 application.latitude = 0;
-                application.overallRating = -1;
+                application.overallRating = 0;
 
                 Toast.makeText(Confirm.this,"Corner Saved!",Toast.LENGTH_LONG).show();
 
