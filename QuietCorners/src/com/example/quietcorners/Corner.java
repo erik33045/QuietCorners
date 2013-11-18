@@ -1,6 +1,7 @@
 package com.example.quietcorners;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -141,7 +142,7 @@ public class Corner {
             Corner corner = new Corner(array.getJSONObject(0));
 
             //Load the comments if it has one
-            // corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
+            corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
 
             //Load Corner Picture if it has one
             corner.Image = Corner.GetCornerImageById(corner.Id);
@@ -192,11 +193,12 @@ public class Corner {
 
     public static Bitmap GetCornerImageById(int cornerId) {
         String queryString = GetCornerImageQueryString(cornerId);
+        byte[] array;
         try {
-            byte[] array = Corner.AccessURLReturnImage(queryString);
-            Bitmap bitmap = new PicRecord().GetBitMapFromByteArray(array);
+            array = Corner.AccessURLReturnImage(queryString);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(array, 0, array.length);
             return bitmap;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

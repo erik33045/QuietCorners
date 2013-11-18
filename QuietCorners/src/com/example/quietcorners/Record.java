@@ -135,7 +135,7 @@ public class Record extends Activity {
             @Override
             public void onClick(View view) {
 
-                Corner corner = Corner.LoadCorner(38);
+                Corner corner = Corner.LoadCorner(74);
                 Assert.assertNotNull(corner.Comments);
                 Assert.assertNotNull(corner.Image);
             }
