@@ -17,6 +17,8 @@ import junit.framework.Assert;
 
 public class Record extends Activity {
     LocationManager locationManager = null;
+    TextView txtCurrentLocation;
+    Button confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +30,18 @@ public class Record extends Activity {
         GetPictureButtonAndBindClickEvent();
         GetOpenNetworksButtonAndBindClickEvent();
         GetConfirmButtonAndBindClickEvent();
+        txtCurrentLocation = (TextView)findViewById(R.id.txtCurrentLocation);
+        txtCurrentLocation.setText("Finding Location");
+        confirmButton = (Button)findViewById(R.id.confirmButton);
+        confirmButton.setEnabled(false);
     }
 
     //Start a location listener
     LocationListener onLocationChange = new LocationListener() {
         public void onLocationChanged(Location loc) {
             SetTextToCurrentLocation(loc);
+            txtCurrentLocation.setText("Location Found!");
+            confirmButton.setEnabled(true);
         }
 
         public void onProviderDisabled(String provider) {
@@ -52,8 +60,6 @@ public class Record extends Activity {
 
     private void SetTextToCurrentLocation(Location loc) {
         LatLng coordinate = LocationMethods.GetCoordinate(loc);
-        TextView currentLocation = (TextView) findViewById(R.id.txtCurrentLocation);
-        currentLocation.setText(getResources().getString(R.string.current_location) + " Lat: " + coordinate.latitude + " Lon: " + coordinate.longitude);
         Variables application = (Variables)getApplication();
         application.longitude = coordinate.longitude;
         application.latitude = coordinate.latitude;
