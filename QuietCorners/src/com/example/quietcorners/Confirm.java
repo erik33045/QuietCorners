@@ -50,11 +50,6 @@ public class Confirm extends Activity {
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
         overallRatingBar.setStepSize(1);
 
-        while(overallRatingBar.getRating() == -1){
-            completeButton.setEnabled(false);
-        }
-        completeButton.setEnabled(true);
-
         //Wireless
         hasOpenNetwork = (TextView)findViewById(R.id.txtHasOpenNetwork);
         if(application.openNetwork) hasOpenNetwork.setText("YES");
@@ -98,7 +93,7 @@ public class Confirm extends Activity {
                 application.cornerBitmap = null;
                 application.longitude = 0;
                 application.latitude = 0;
-                application.overallRating = -1;
+                application.overallRating = 0;
 
                 Toast.makeText(Confirm.this,"Corner Saved!",Toast.LENGTH_LONG).show();
 
