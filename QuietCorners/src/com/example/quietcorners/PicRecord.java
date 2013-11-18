@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,7 +59,9 @@ public class PicRecord extends Activity {
     public byte[] GetByteArrayFromBitmap(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        return baos.toByteArray();
+        byte[] outputChunk = baos.toByteArray();
+        encodedImageString = Base64.encodeToString(outputChunk, Base64.DEFAULT);
+        return Base64.decode(encodedImageString, Base64.DEFAULT);
     }
 
     private void confirmPictureButtonEvent(){
