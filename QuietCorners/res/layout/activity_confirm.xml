@@ -22,7 +22,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/Brightness"
                 android:id="@+id/textView"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/text" />
 
@@ -33,7 +33,7 @@
                 android:gravity="right"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="30dp">
 
                 <RatingBar
                     android:id="@+id/rtbLightRating"
@@ -44,7 +44,7 @@
                     android:rating="0"
                     android:isIndicator="false"
                     style="@style/foodRatingBar"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="30dp" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -114,115 +114,70 @@
                     android:id="@+id/txtHasOpenNetwork"
                     android:textColor="@color/text" />
             </RelativeLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/OverallRating"
-                android:id="@+id/textView3"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/text" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp">
-
-                <RatingBar
-                    style="@style/foodRatingBar"
-                    android:id="@+id/rtbOverallRating"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:numStars="5"
-                    android:rating="0"
-                    android:isIndicator="false" />
-            </RelativeLayout>
-        </LinearLayout>
-
+       </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/picture"
             android:minHeight="200dp"
             android:minWidth="400dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@color/black_overlay"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:contentDescription="@string/pictureDescription" />
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Coments"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/text"
-        android:layout_marginTop="10dp" />
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="20dp">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lvComments"
-        android:background="@color/black_overlay"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="10dp"
-        android:smoothScrollbar="true" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAlignment="gravity"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp">
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addComment"
-        android:id="@+id/addComment"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignRight="@+id/lvComments" />
-
-</RelativeLayout>
-
-
-<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm Page Placeholder"
-        android:textColor="@color/background_text"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/text_heading_height"
-        android:layout_centerVertical="true"
+        android:text="Complete Corner"
+        android:id="@+id/completeButton"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/linearLayout4"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Complete and Upload"
-        android:id="@+id/completeButton"
-        android:singleLine="false" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rate Overall"
+        android:id="@+id/textView3"
+        android:textColor="@color/text"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_toLeftOf="@+id/completeButton"
+        android:layout_marginTop="30dp" />
 
     <RatingBar
         style="@style/foodRatingBar"
-        android:id="@+id/overallRating"
+        android:id="@+id/rtbOverallRating"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
         android:numStars="5"
         android:rating="0"
-        android:isIndicator="false" />
+        android:isIndicator="false"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
 
 </RelativeLayout>
+
