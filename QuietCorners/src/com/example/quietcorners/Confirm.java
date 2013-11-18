@@ -23,7 +23,6 @@ public class Confirm extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
         completeButton = (Button) findViewById(R.id.completeButton);
-        completeButton.setEnabled(false);
         GetCompleteButtonEvent();
         Variables application = (Variables)getApplication();
 
@@ -50,8 +49,11 @@ public class Confirm extends Activity {
         //Over Rating Bar
         overallRatingBar = (RatingBar)findViewById(R.id.rtbOverallRating);
         overallRatingBar.setStepSize(1);
-        if(overallRatingBar.getRating() == -1);
-        else completeButton.setEnabled(true);
+
+        while(overallRatingBar.getRating() == -1){
+            completeButton.setEnabled(false);
+        }
+        completeButton.setEnabled(true);
 
         //Wireless
         hasOpenNetwork = (TextView)findViewById(R.id.txtHasOpenNetwork);
