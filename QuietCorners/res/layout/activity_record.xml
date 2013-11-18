@@ -27,7 +27,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/current_location"
                 android:id="@+id/txtCurrentLocation"
                 android:layout_above="@+id/textView2"
                 android:layout_alignLeft="@+id/textView2"
