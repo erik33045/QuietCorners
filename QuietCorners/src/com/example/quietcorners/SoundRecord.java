@@ -126,7 +126,7 @@ public class SoundRecord extends Activity {
 
     private void saveRating() {
         Variables application = (Variables)getApplication();
-        application.soundRating = calculateRating();
+        application.soundRating = soundRating;
     }
 
     private int calculateRating() {

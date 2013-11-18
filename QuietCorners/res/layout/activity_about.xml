@@ -38,7 +38,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="127dp"
                 android:layout_height="fill_parent">
 
                 <TextView
@@ -47,9 +47,11 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/the_app"
                     android:id="@+id/textView2"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_marginLeft="30dp"
-                    android:textColor="@color/text2" />
+                    android:layout_gravity="center_vertical|left"
+                    android:textColor="@color/text2"
+                    android:gravity="center"
+                    android:editable="false"
+                    android:layout_marginLeft="30dp" />
             </FrameLayout>
 
             <FrameLayout

@@ -37,7 +37,7 @@ public class Confirm extends Activity {
         });
 
         //Light Rating Bar
-        lightRatingBar = (RatingBar)findViewById(R.id.rtbLighRating);
+        lightRatingBar = (RatingBar)findViewById(R.id.rtbLightRating);
         lightRatingBar.setRating(application.lightRating);
         lightRatingBar.setFocusable(false);
         lightRatingBar.setOnTouchListener(new View.OnTouchListener() {
