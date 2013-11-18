@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
@@ -17,7 +18,7 @@ public class PicRecord extends Activity {
 
     private ImageView image;
     public Bitmap bmp;
-    String encodedImageString;
+    String encodedImage;
 
 
 
@@ -50,15 +51,18 @@ public class PicRecord extends Activity {
         }
     }
 
-    public Bitmap GetBitMapFromByteArray(byte[] byteArray) {
+    public Bitmap GetBitMapFromByteArray(String encodedImage) {
+        byte[] byteArray = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 
 
-    public byte[] GetByteArrayFromBitmap(Bitmap bmp) {
+    public String GetByteArrayFromBitmap(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        return baos.toByteArray();
+        byte[] array = baos.toByteArray();
+        encodedImage = Base64.encodeToString(array, Base64.NO_WRAP);
+        return encodedImage;
     }
 
     private void confirmPictureButtonEvent(){
