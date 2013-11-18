@@ -1,57 +1,83 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/record_bg_land"
+    android:background="@drawable/bg_faded"
     tools:context=".SoundRecord">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ui_panel_edge"></FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/ui_panel"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Record"
+                android:id="@+id/get_sound"
+                android:layout_above="@+id/textView2"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:id="@+id/rec_dB"
+                android:gravity="center"
+                android:layout_below="@+id/textView2"
+                android:layout_alignParentLeft="true" />
+
+            <RatingBar
+                style="@style/foodRatingBar"
+                android:id="@+id/rating_Sound"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:numStars="5"
+                android:rating="0"
+                android:isIndicator="false"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/sav_Sound"
+                android:layout_below="@+id/rec_dB"
+                android:layout_centerHorizontal="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/decibel_measurement"
-        android:textColor="@color/background_text"
+        android:text="Sound Record"
         android:textIsSelectable="false"
         android:textSize="@dimen/text_heading_height"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView"
+        android:background="@drawable/ui_info"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sample"
-        android:id="@+id/get_sound"
-        android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/rec_dB"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:gravity="center" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/sav_Sound"
-        android:layout_below="@+id/rec_dB"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-    <RatingBar
-        style="@style/foodRatingBar"
-        android:id="@+id/rating_Sound"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:numStars="5"
-        android:rating="0"
-        android:isIndicator="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true" />
-
-</RelativeLayout>
+</FrameLayout>
