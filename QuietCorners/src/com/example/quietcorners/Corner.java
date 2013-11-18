@@ -94,12 +94,14 @@ public class Corner {
             if (AccessURLNoReturnData(saveCornerQuery) == 0) {
                 try {
                     Thread.sleep(200);
+
+                    if (corner.Image != null && new PicRecord().GetByteArrayFromBitmap(corner.Image).length > 0) {
+                        int cornerId = GetCornerIdByPosition(new LatLng(corner.Lat, corner.Lng));
+                        Thread.sleep(200);
+                        return SaveCornerImage(corner.Image, cornerId);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                if (corner.Image != null && new PicRecord().GetByteArrayFromBitmap(corner.Image).length > 0) {
-                    int cornerId = GetCornerIdByPosition(new LatLng(corner.Lat, corner.Lng));
-                    return SaveCornerImage(corner.Image, cornerId);
                 }
             }
         } catch (UnsupportedEncodingException e) {
@@ -109,6 +111,7 @@ public class Corner {
         return 0;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static Comment LoadComment(int id) {
         try {
             String query = CreateGetCommentByIdQueryString(id);
@@ -135,19 +138,25 @@ public class Corner {
 
     public static Corner LoadCorner(int id) {
         try {
-            String query = CreateGetCornerByIdQueryString(id);
-            JSONArray array = AccessURLReturnJSON(query);
+            try {
+                String query = CreateGetCornerByIdQueryString(id);
+                JSONArray array = AccessURLReturnJSON(query);
 
             //Load the corner
             Corner corner = new Corner(array.getJSONObject(0));
 
-            //Load the comments if it has one
-            corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
+                Thread.sleep(200);
+                //Load the comments if it has one
+                corner.Comments = Corner.LoadCommentsByCornerId(corner.Id);
 
-            //Load Corner Picture if it has one
-            corner.Image = Corner.GetCornerImageById(corner.Id);
-
-            return corner;
+                Thread.sleep(200);
+                //Load Corner Picture if it has one
+                corner.Image = Corner.GetCornerImageById(corner.Id);
+                return corner;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return null;
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -167,6 +176,7 @@ public class Corner {
         }
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static ArrayList<Corner> LoadAllCorners() {
         try {
             String query = CreateGetAllCornersQueryString();
@@ -196,8 +206,7 @@ public class Corner {
         byte[] array;
         try {
             array = Corner.AccessURLReturnImage(queryString);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(array, 0, array.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(array, 0, array.length);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
