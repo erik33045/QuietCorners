@@ -16,35 +16,49 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:layout_gravity="bottom">
+        android:gravity="bottom">
 
-        <Button
+        <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Record"
-            android:id="@+id/record_button"
-            android:layout_gravity="bottom"
-            android:enabled="true"
-            android:gravity="center" />
+            android:background="@drawable/ui_panel_edge"></FrameLayout>
 
-        <Button
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Explore"
-            android:id="@+id/explore_button"
+            android:gravity="bottom"
             android:layout_gravity="bottom"
-            android:enabled="true"
-            android:gravity="center" />
+            android:background="@drawable/ui_panel">
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="About"
-            android:id="@+id/about_button"
-            android:layout_gravity="bottom"
-            android:enabled="true"
-            android:gravity="center" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Record"
+                android:id="@+id/record_button"
+                android:layout_gravity="bottom"
+                android:enabled="true"
+                android:gravity="center" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Explore"
+                android:id="@+id/explore_button"
+                android:layout_gravity="bottom"
+                android:enabled="true"
+                android:gravity="center" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:id="@+id/about_button"
+                android:layout_gravity="bottom"
+                android:enabled="true"
+                android:gravity="center" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

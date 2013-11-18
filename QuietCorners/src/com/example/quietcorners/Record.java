@@ -28,7 +28,6 @@ public class Record extends Activity {
         GetPictureButtonAndBindClickEvent();
         GetOpenNetworksButtonAndBindClickEvent();
         GetConfirmButtonAndBindClickEvent();
-        GetTestButtonAndBindClickEvent();
     }
 
     //Start a location listener
@@ -127,19 +126,5 @@ public class Record extends Activity {
                 startActivity(i);
             }
         });
-    }
-
-    private void GetTestButtonAndBindClickEvent() {
-        Button button = (Button) findViewById(R.id.testButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Corner corner = Corner.LoadCorner(95);
-                Assert.assertNotNull(corner.Comments);
-                Assert.assertNotNull(corner.Image);
-            }
-        });
-
     }
 }
