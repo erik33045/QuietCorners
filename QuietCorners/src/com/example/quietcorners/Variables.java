@@ -12,6 +12,4 @@ public class Variables extends Application {
     public double longitude = 0;
     public double latitude = 0;
     public int overallRating = 0;
-    public int cornerID = 0;
-    public boolean descriptionFlag = false;
 }
