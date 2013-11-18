@@ -1,45 +1,73 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/record_bg_land"
+    android:background="@drawable/bg_faded"
     tools:context=".WifiTest">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ui_panel_edge"></FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ui_panel">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test Wifi"
+                android:id="@+id/test_wifi"
+                android:layout_marginTop="21dp"
+                android:layout_below="@+id/textView"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Signal: None"
+                android:id="@+id/rec_Wifi"
+                android:layout_below="@+id/test_wifi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/sav_Wifi"
+                android:layout_below="@+id/rec_Wifi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test the wifi Page Placeholder"
-        android:textColor="@color/background_text"
+        android:text="Wifi Test"
         android:textIsSelectable="false"
         android:textSize="@dimen/text_heading_height"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:id="@+id/textView2"
+        android:background="@drawable/ui_info"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test Wifi"
-        android:id="@+id/test_wifi"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Signal: None"
-        android:id="@+id/rec_Wifi"
-        android:layout_below="@+id/test_wifi"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/sav_Wifi"
-        android:layout_below="@+id/rec_Wifi"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+</FrameLayout>
